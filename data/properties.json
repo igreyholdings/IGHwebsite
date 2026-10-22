@@ -94,15 +94,17 @@
   },
   {
     "id": 6,
-    "title": "Premium 4 BHK Dining Residence",
-    "location": "Gated society, Bangalore",
-    "price": "₹1.5 Cr",
-    "mode": "Sale",
-    "kind": "Residential",
-    "tag": "Available",
-    "image": "assets/images/03_dining_room.jpg",
+    "title": "CO-WORKING SPACE",
+    "location": "WHITEFIELD, Bangalore",
+    "price": "₹10000 per Seat",
+    "mode": "Rent",
+    "kind": "Commercial",
+    "tag": "Upcoming",
+    "image": "assets/uploads/0a876770354c8dc1.jpg",
     "images": [
-      "assets/images/03_dining_room.jpg"
+      "assets/uploads/0a876770354c8dc1.jpg",
+      "assets/uploads/5bbc1aa93fe72afc.jpg",
+      "assets/uploads/eb4bd2ae7065a39a.jpg"
     ]
   }
 ]
