@@ -23,14 +23,19 @@
   {
     "id": 2,
     "title": "Skyline Apartment Residences",
-    "location": "Gated society, Bangalore",
-    "price": "₹1.2 Cr",
-    "mode": "Sale",
+    "location": "Whitefield, Bangalore",
+    "price": "₹35L",
+    "mode": "Lease",
     "kind": "Residential",
     "tag": "Available",
-    "image": "assets/images/01_apartment_building_exterior.jpg",
+    "image": "assets/uploads/fee353e80123aa66.jpg",
     "images": [
-      "assets/images/01_apartment_building_exterior.jpg"
+      "assets/uploads/fee353e80123aa66.jpg",
+      "assets/uploads/75bc63daa677b3d4.jpg",
+      "assets/uploads/fd77a98b33ffa18e.jpg",
+      "assets/uploads/20a0aa67593f2e02.jpg",
+      "assets/uploads/c1ae396da2e121f3.jpg",
+      "assets/uploads/7e58d5be4efc1041.jpg"
     ]
   },
   {
