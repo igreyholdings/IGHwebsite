@@ -77,15 +77,19 @@
   },
   {
     "id": 5,
-    "title": "Rooftop Pool Terrace Lounge",
-    "location": "Bannerghatta Road, Bangalore",
-    "price": "₹1.1 L / month",
-    "mode": "Lease",
-    "kind": "Commercial",
-    "tag": "Available",
-    "image": "assets/images/06_rooftop_pool_terrace.jpg",
+    "title": "4BHK VILLA - SEMI FURNISHED",
+    "location": "JP NAGAR, Bangalore",
+    "price": "₹1L/month",
+    "mode": "Rent",
+    "kind": "Residential",
+    "tag": "Upcoming",
+    "image": "assets/uploads/3812ec38990f50ad.jpg",
     "images": [
-      "assets/images/06_rooftop_pool_terrace.jpg"
+      "assets/uploads/3812ec38990f50ad.jpg",
+      "assets/uploads/48934b323b4efbf9.jpg",
+      "assets/uploads/cf1a35fd60ab20ba.jpg",
+      "assets/uploads/aa3123286bf9625a.jpg",
+      "assets/uploads/dc9943187d7df466.jpg"
     ]
   },
   {
