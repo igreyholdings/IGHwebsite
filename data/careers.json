@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "title": "Property Consultant",
+    "title": "Relationship Manager",
     "department": "Sales",
     "location": "Bangalore",
     "type": "Full-time",
     "experience": "1–3 years",
     "status": "Open",
-    "description": "Guide buyers, sellers and tenants through property options, viewings and transactions."
+    "description": "Manage customer relationships, understand property requirements, recommend suitable properties, and coordinate property visits. Follow up with prospects, maintain CRM records, resolve customer queries, and achieve assigned sales targets."
   },
   {
     "id": 2,
