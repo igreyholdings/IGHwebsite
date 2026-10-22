@@ -135,11 +135,10 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
 .pic:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
 @media(hover:none){.pic .arr{width:38px;height:38px}}
 
-/* mobile: one-line headings, no "Our values" */
+/* mobile: larger headings (one line if it fits, max two), no "Our values" */
 @media(max-width:900px){p{text-align:left}.vm,.lease,.contact,.fgrid,.about{grid-template-columns:minmax(0,1fr)}.lease>*,.contact>*,.about>*{min-width:0}}
 @media(max-width:700px){
- h2{white-space:nowrap;text-wrap:nowrap;font-size:var(--hfs,calc((100vw - 56px)/25));font-weight:600;letter-spacing:-.02em}
- .hwrap h2{white-space:normal;text-wrap:balance}
+ h2{font-size:var(--hfs,1.7rem);line-height:1.2;font-weight:600;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:break-word}
  .hero h1{font-size:min(1.8rem,7vw);white-space:nowrap}
  .ov,.vals{display:none}
  .lease{padding:16px}

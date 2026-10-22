@@ -43,17 +43,13 @@ function draw(){
   a.appendChild(pic);a.appendChild(b);pl.appendChild(a)})}
 if(pl&&fb)load("properties").then(function(d){P=d;draw()});
 
-/* Mobile: keep every section heading on one line (one shared size, measured with the real font) */
+/* Headings: as large as possible, one line if it fits, otherwise at most two lines (one shared size on mobile) */
 function fitHeads(){
  var root=document.documentElement,hs=[].slice.call(document.querySelectorAll("h2"));
- root.classList.remove("hwrap");root.style.removeProperty("--hfs");
+ root.style.removeProperty("--hfs");
  if(!window.matchMedia("(max-width:700px)").matches||!hs.length)return;
- root.style.setProperty("--hfs","20px");
- var min=26;
- hs.forEach(function(h){var r=document.createRange();r.selectNodeContents(h);var w=r.getBoundingClientRect().width,av=h.clientWidth;if(w>0&&av>0)min=Math.min(min,20*av/w)});
- min=Math.floor(min*0.97*10)/10;
- if(min<12){min=12;root.classList.add("hwrap")}
- root.style.setProperty("--hfs",min+"px")}
+ function ok(px){root.style.setProperty("--hfs",px+"px");return hs.every(function(h){return h.getBoundingClientRect().height<=px*1.2*2+2&&h.scrollWidth<=h.clientWidth+1})}
+ var px=30;while(px>18&&!ok(px))px-=0.5;ok(px)}
 fitHeads();window.addEventListener("resize",fitHeads);window.addEventListener("load",fitHeads);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitHeads);
 
