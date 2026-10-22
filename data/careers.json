@@ -1,5 +1,15 @@
 [
   {
+    "id": 1792658244496,
+    "title": "HR Executive",
+    "department": "Human Resource",
+    "location": "Bangalore",
+    "type": "Full-time",
+    "experience": "2-6",
+    "status": "Open",
+    "description": "HR Executive – Roles and Responsibilities\n\n- Manage end-to-end recruitment, including job postings, candidate screening, interview scheduling, and onboarding.\n- Prepare offer letters, appointment letters, employee records, and other HR documentation.\n- Coordinate joining formalities, document verification, employee induction, and orientation.\n- Maintain attendance, leave records, employee information, and payroll-related data.\n- Coordinate monthly payroll processing with the accounts or finance team.\n- Monitor employee performance, probation periods, and confirmation processes.\n- Communicate company policies, HR procedures, attendance rules, and workplace guidelines.\n- Handle employee queries, grievances, and workplace concerns professionally.\n- Coordinate employee engagement activities, training sessions, and internal communications.\n- Monitor compliance with company policies and applicable employment regulations.\n- Manage exit formalities, resignation documentation, exit interviews, and employee handovers.\n- Prepare HR reports covering recruitment, attendance, employee turnover, and workforce status.\n- Coordinate with department managers to identify staffing requirements and support workforce planning.\n- Maintain confidentiality of employee records and sensitive HR information."
+  },
+  {
     "id": 1,
     "title": "Relationship Manager",
     "department": "Sales",
