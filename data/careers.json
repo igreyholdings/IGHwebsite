@@ -1,42 +1,32 @@
 [
   {
-    "id": 1792658244496,
-    "title": "HR Executive",
-    "department": "Human Resource",
-    "location": "Bangalore",
-    "type": "Full-time",
-    "experience": "2-6",
-    "status": "Open",
-    "description": "Manage recruitment, candidate screening, interviews, and employee onboarding. Maintain employee records, attendance, and payroll data while coordinating HR documentation, employee queries, performance reviews, and exit formalities."
-  },
-  {
     "id": 1,
-    "title": "Relationship Manager",
+    "title": "Property Consultant",
     "department": "Sales",
     "location": "Bangalore",
     "type": "Full-time",
     "experience": "1–3 years",
     "status": "Open",
-    "description": "Manage customer relationships, understand property requirements, recommend suitable properties, and coordinate property visits. Follow up with prospects, maintain CRM records, resolve customer queries, and achieve assigned sales targets."
+    "description": "Guide buyers, sellers and tenants through property options, viewings and transactions."
   },
   {
     "id": 2,
-    "title": "Business Development Manager",
-    "department": "Sales",
+    "title": "Property Manager",
+    "department": "Operations",
     "location": "Bangalore",
     "type": "Full-time",
     "experience": "3–5 years",
     "status": "Open",
-    "description": "Identify business opportunities, develop growth strategies, and build relationships with customers and business partners. Manage the sales pipeline, guide the sales team, monitor performance, and achieve assigned revenue targets."
+    "description": "Coordinate tenants, rent administration, inspections and maintenance for managed properties."
   },
   {
     "id": 3,
-    "title": "Business Development Executive",
-    "department": "Sales",
-    "location": "Bangalore",
+    "title": "Site Engineer",
+    "department": "Construction",
+    "location": "Mysuru",
     "type": "Full-time",
-    "experience": "1-4",
+    "experience": "2–4 years",
     "status": "Open",
-    "description": "Generate leads through property portals, online platforms, and referrals. Contact prospects, explain company services, coordinate property visits, maintain lead records, follow up consistently, and achieve assigned sales targets."
+    "description": "Support project coordination, contractor communication and progress tracking on development sites."
   }
 ]

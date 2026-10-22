@@ -9,13 +9,32 @@ document.querySelectorAll("[data-type]").forEach(function(a){a.addEventListener(
 /* Properties (data/properties.json, edited from /admin) */
 var pl=$("#plist"),fb=$("#filters"),F=["All Properties","For Sale","For Rent","For Lease","Residential","Commercial","Land & Plots"],cur=F[0],P=[];
 function ok(p){return cur==F[0]||(cur=="For Sale"&&p.mode=="Sale")||(cur=="For Rent"&&p.mode=="Rent")||(cur=="For Lease"&&p.mode=="Lease")||cur==p.kind}
+/* Photo carousel: p.images (array) with p.image as fallback for older listings */
+function slider(pic,p){
+ var im=(Array.isArray(p.images)&&p.images.length?p.images:(p.image?[p.image]:[])).filter(Boolean);
+ if(!im.length)return;
+ var tr=h("div","track"),i=0,n=im.length;
+ im.forEach(function(src,k){var g=h("img");g.src=encodeURI(src);g.alt=(p.title||"Property")+" photo "+(k+1)+" of "+n;g.loading=k?"lazy":"eager";g.draggable=false;tr.appendChild(g)});
+ pic.appendChild(tr);
+ if(n<2)return;
+ var ct=h("span","count","1 / "+n),dots=h("div","dots"),ds=[];
+ function go(k){i=(k+n)%n;tr.style.transform="translateX(-"+i*100+"%)";ct.textContent=(i+1)+" / "+n;ds.forEach(function(d,j){d.classList.toggle("on",j==i)})}
+ function arrow(c,lbl,ch,d){var b=h("button","arr "+c,ch);b.type="button";b.setAttribute("aria-label",lbl);b.onclick=function(e){e.preventDefault();e.stopPropagation();go(i+d)};return b}
+ for(var k=0;k<n;k++)(function(k){var d=h("button","dot");d.type="button";d.setAttribute("aria-label","Show photo "+(k+1));d.onclick=function(){go(k)};ds.push(d);dots.appendChild(d)})(k);
+ pic.appendChild(arrow("prev","Previous photo","\u2039",-1));pic.appendChild(arrow("next","Next photo","\u203A",1));
+ pic.appendChild(ct);pic.appendChild(dots);go(0);
+ var x0=null;
+ pic.addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
+ pic.addEventListener("touchend",function(e){if(x0==null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40)go(i+(dx<0?1:-1))},{passive:true});
+ pic.tabIndex=0;pic.addEventListener("keydown",function(e){if(e.key=="ArrowLeft")go(i-1);else if(e.key=="ArrowRight")go(i+1)});
+}
 function draw(){
  fb.textContent="";F.forEach(function(f){var b=h("button","chip",f);b.setAttribute("aria-pressed",f==cur);b.onclick=function(){cur=f;draw()};fb.appendChild(b)});
  pl.textContent="";var l=P.filter(ok);
  if(!l.length){pl.appendChild(h("p","","No listings match this filter yet."));return}
  l.forEach(function(p){
-  var a=h("article","card prop"),pic=h("div","pic");pic.setAttribute("role","img");pic.setAttribute("aria-label",p.title||"Property");
-  if(p.image)pic.style.backgroundImage='url("'+encodeURI(p.image).replace(/"/g,"%22")+'")';
+  var a=h("article","card prop"),pic=h("div","pic");pic.setAttribute("role","group");pic.setAttribute("aria-roledescription","carousel");pic.setAttribute("aria-label",p.title||"Property");
+  slider(pic,p);
   pic.appendChild(h("span","tag",p.tag||"Available"));
   var b=h("div","pb");b.appendChild(h("span","price",p.price||""));b.appendChild(h("span","meta",(p.kind||"")+" · For "+(p.mode||"")));
   var t=h("h3","",p.title);t.style.margin="8px 0 4px";b.appendChild(t);
