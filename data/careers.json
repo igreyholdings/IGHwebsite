@@ -1,5 +1,15 @@
 [
   {
+    "id": 1792672446146,
+    "title": "HR Executive",
+    "department": "HR",
+    "location": "Bangalore",
+    "type": "Full-time",
+    "experience": "2-6",
+    "status": "Open",
+    "description": "Manage recruitment, candidate screening, interviews, and employee onboarding. Maintain employee records, attendance, and payroll data while coordinating HR documentation, employee queries, performance reviews, and exit formalities."
+  },
+  {
     "id": 1,
     "title": "Relationship Manager",
     "department": "Sales",
