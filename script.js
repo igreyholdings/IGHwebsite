@@ -43,13 +43,23 @@ function draw(){
   a.appendChild(pic);a.appendChild(b);pl.appendChild(a)})}
 if(pl&&fb)load("properties").then(function(d){P=d;draw()});
 
-/* Headings: as large as possible, one line if it fits, otherwise at most two lines (one shared size on mobile) */
+/* Mobile headings: each one is sized to fill the line width (max two lines); justified when that looks even, otherwise left-aligned */
+function fillOf(h){
+ var t=h.firstChild;if(!t||t.nodeType!=3)return 1;
+ var r=document.createRange(),x=t.nodeValue,lh=parseFloat(getComputedStyle(h).lineHeight),last=0,i;
+ for(i=1;i<=x.length;i++){
+  if(x.charAt(i-1)!=" "&&i<x.length)continue;
+  r.setStart(t,0);r.setEnd(t,i);
+  if(r.getBoundingClientRect().height>lh*1.5)break;last=i}
+ if(i>x.length||!last)return 1;
+ r.setStart(t,0);r.setEnd(t,last);return r.getBoundingClientRect().width/h.clientWidth}
 function fitHeads(){
- var root=document.documentElement,hs=[].slice.call(document.querySelectorAll("h2"));
- root.style.removeProperty("--hfs");
- if(!window.matchMedia("(max-width:700px)").matches||!hs.length)return;
- function ok(px){root.style.setProperty("--hfs",px+"px");return hs.every(function(h){return h.getBoundingClientRect().height<=px*1.2*2+2&&h.scrollWidth<=h.clientWidth+1})}
- var px=30;while(px>18&&!ok(px))px-=0.5;ok(px)}
+ var hs=[].slice.call(document.querySelectorAll("h2")),mob=window.matchMedia("(max-width:700px)").matches;
+ hs.forEach(function(h){
+  h.style.fontSize="";h.style.textAlign="";if(!mob)return;
+  var px=34;h.style.fontSize=px+"px";h.style.textAlign="left";
+  while(px>18&&(h.getBoundingClientRect().height>px*1.2*2+2||h.scrollWidth>h.clientWidth+1)){px-=0.5;h.style.fontSize=px+"px"}
+  h.style.textAlign=fillOf(h)>=0.92?"justify":"left"})}
 fitHeads();window.addEventListener("resize",fitHeads);window.addEventListener("load",fitHeads);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitHeads);
 
