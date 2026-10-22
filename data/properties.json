@@ -40,15 +40,20 @@
   },
   {
     "id": 3,
-    "title": "Garden View 3 BHK Home",
-    "location": "Gated society, Mysuru",
-    "price": "₹95 L",
-    "mode": "Sale",
+    "title": "CITY VIEW 3 BHK FLAT",
+    "location": "Hebbal, Mysuru",
+    "price": "₹45000",
+    "mode": "Rent",
     "kind": "Residential",
-    "tag": "Limited offer",
-    "image": "assets/images/04_bedroom.jpg",
+    "tag": "Upcoming",
+    "image": "assets/uploads/fbe5d76f0c1b4317.jpg",
     "images": [
-      "assets/images/04_bedroom.jpg"
+      "assets/uploads/fbe5d76f0c1b4317.jpg",
+      "assets/uploads/0ba245392d958a3e.jpg",
+      "assets/uploads/3a60003883a64488.jpg",
+      "assets/uploads/cea348d386b425f4.jpg",
+      "assets/uploads/6edf426934926597.jpg",
+      "assets/uploads/3040182bd8fc2da7.jpg"
     ]
   },
   {
