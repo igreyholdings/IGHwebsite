@@ -22,15 +22,20 @@
   },
   {
     "id": 2,
-    "title": "Skyline Apartment Residences",
-    "location": "Gated society, Bangalore",
+    "title": "2BHK FLAT in Skyline Apartment",
+    "location": "HSR, Bangalore",
     "price": "₹1.2 Cr",
     "mode": "Sale",
     "kind": "Residential",
-    "tag": "Available",
-    "image": "assets/images/01_apartment_building_exterior.jpg",
+    "tag": "Upcoming",
+    "image": "assets/uploads/b991cc8da34d3f15.jpg",
     "images": [
-      "assets/images/01_apartment_building_exterior.jpg"
+      "assets/uploads/b991cc8da34d3f15.jpg",
+      "assets/uploads/a8cef5613f9ecd04.jpg",
+      "assets/uploads/0feee05e059aeaa6.jpg",
+      "assets/uploads/9eef3e103a411eb4.jpg",
+      "assets/uploads/41fca0a467adc963.jpg",
+      "assets/uploads/8b51425463af8f0c.jpg"
     ]
   },
   {
