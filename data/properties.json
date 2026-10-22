@@ -58,15 +58,21 @@
   },
   {
     "id": 4,
-    "title": "Family 2 BHK Apartment",
+    "title": "3 BHK APARTMENT",
     "location": "Bilekahalli, Bangalore",
-    "price": "₹32,000 / month",
-    "mode": "Rent",
+    "price": "₹30L",
+    "mode": "Lease",
     "kind": "Residential",
     "tag": "Available",
-    "image": "assets/images/05_modern_kitchen.jpg",
+    "image": "assets/uploads/d2ff80724ef75abe.jpg",
     "images": [
-      "assets/images/05_modern_kitchen.jpg"
+      "assets/uploads/d2ff80724ef75abe.jpg",
+      "assets/uploads/9c3df5e8169ccb82.jpg",
+      "assets/uploads/f4a4bc70ad8642b4.jpg",
+      "assets/uploads/84eac729c94e479f.jpg",
+      "assets/uploads/7b8266f5282aff90.jpg",
+      "assets/uploads/0ce5738261c9c900.jpg",
+      "assets/uploads/bb9b1bfeebde286e.jpg"
     ]
   },
   {
