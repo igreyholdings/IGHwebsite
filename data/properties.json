@@ -2,12 +2,23 @@
   {
     "id": 1,
     "title": "Executive 3 BHK Residence",
-    "location": "Gated society, Bangalore",
-    "price": "₹85 L",
+    "location": "Electronic City, Bangalore",
+    "price": "₹2.2Cr",
     "mode": "Sale",
     "kind": "Residential",
-    "tag": "Upcoming",
-    "image": "assets/images/02_luxury_living_room.jpg"
+    "tag": "Available",
+    "image": "assets/images/02_luxury_living_room.jpg",
+    "images": [
+      "assets/images/02_luxury_living_room.jpg",
+      "assets/uploads/a58b4d8fe86d16e6.jpg",
+      "assets/uploads/93b1197f903bb944.jpg",
+      "assets/uploads/67e71935133c64d7.jpg",
+      "assets/uploads/a04596be9ea321bd.jpg",
+      "assets/uploads/76bb1bc6ec1bff15.jpg",
+      "assets/uploads/324af653ac2f6954.jpg",
+      "assets/uploads/8f936d5a72eb6892.jpg",
+      "assets/uploads/e394b26915306f61.jpg"
+    ]
   },
   {
     "id": 2,
@@ -17,7 +28,10 @@
     "mode": "Sale",
     "kind": "Residential",
     "tag": "Available",
-    "image": "assets/images/01_apartment_building_exterior.jpg"
+    "image": "assets/images/01_apartment_building_exterior.jpg",
+    "images": [
+      "assets/images/01_apartment_building_exterior.jpg"
+    ]
   },
   {
     "id": 3,
@@ -27,7 +41,10 @@
     "mode": "Sale",
     "kind": "Residential",
     "tag": "Limited offer",
-    "image": "assets/images/04_bedroom.jpg"
+    "image": "assets/images/04_bedroom.jpg",
+    "images": [
+      "assets/images/04_bedroom.jpg"
+    ]
   },
   {
     "id": 4,
@@ -37,7 +54,10 @@
     "mode": "Rent",
     "kind": "Residential",
     "tag": "Available",
-    "image": "assets/images/05_modern_kitchen.jpg"
+    "image": "assets/images/05_modern_kitchen.jpg",
+    "images": [
+      "assets/images/05_modern_kitchen.jpg"
+    ]
   },
   {
     "id": 5,
@@ -47,7 +67,10 @@
     "mode": "Lease",
     "kind": "Commercial",
     "tag": "Available",
-    "image": "assets/images/06_rooftop_pool_terrace.jpg"
+    "image": "assets/images/06_rooftop_pool_terrace.jpg",
+    "images": [
+      "assets/images/06_rooftop_pool_terrace.jpg"
+    ]
   },
   {
     "id": 6,
@@ -57,6 +80,9 @@
     "mode": "Sale",
     "kind": "Residential",
     "tag": "Available",
-    "image": "assets/images/03_dining_room.jpg"
+    "image": "assets/images/03_dining_room.jpg",
+    "images": [
+      "assets/images/03_dining_room.jpg"
+    ]
   }
 ]
