@@ -1,42 +1,23 @@
 [
   {
     "id": 1,
-    "title": "3BHK RESIDENTIAL FLAT",
+    "title": "Executive 3 BHK Residence",
     "location": "Gated society, Bangalore",
-    "price": "₹2.2Cr",
+    "price": "₹85 L",
     "mode": "Sale",
     "kind": "Residential",
-    "tag": "Available",
-    "image": "assets/images/02_luxury_living_room.jpg",
-    "images": [
-      "assets/images/02_luxury_living_room.jpg",
-      "assets/uploads/1928d88049d3f948.jpg",
-      "assets/uploads/5afb92fadc65ab84.jpg",
-      "assets/uploads/f919a76322db9dd6.jpg",
-      "assets/uploads/81ed120b863e4dcb.jpg",
-      "assets/uploads/19097316f54045b9.jpg",
-      "assets/uploads/59d9b4375980ed78.jpg",
-      "assets/uploads/5bf8c8e50f8b8926.jpg",
-      "assets/uploads/37d62642429c5cbb.jpg"
-    ]
+    "tag": "Upcoming",
+    "image": "assets/images/02_luxury_living_room.jpg"
   },
   {
     "id": 2,
     "title": "Skyline Apartment Residences",
-    "location": "Whitefield, Bangalore",
-    "price": "₹35L",
-    "mode": "Lease",
+    "location": "Gated society, Bangalore",
+    "price": "₹1.2 Cr",
+    "mode": "Sale",
     "kind": "Residential",
     "tag": "Available",
-    "image": "assets/uploads/fee353e80123aa66.jpg",
-    "images": [
-      "assets/uploads/fee353e80123aa66.jpg",
-      "assets/uploads/75bc63daa677b3d4.jpg",
-      "assets/uploads/fd77a98b33ffa18e.jpg",
-      "assets/uploads/20a0aa67593f2e02.jpg",
-      "assets/uploads/c1ae396da2e121f3.jpg",
-      "assets/uploads/7e58d5be4efc1041.jpg"
-    ]
+    "image": "assets/images/01_apartment_building_exterior.jpg"
   },
   {
     "id": 3,
@@ -46,10 +27,7 @@
     "mode": "Sale",
     "kind": "Residential",
     "tag": "Limited offer",
-    "image": "assets/images/04_bedroom.jpg",
-    "images": [
-      "assets/images/04_bedroom.jpg"
-    ]
+    "image": "assets/images/04_bedroom.jpg"
   },
   {
     "id": 4,
@@ -59,10 +37,7 @@
     "mode": "Rent",
     "kind": "Residential",
     "tag": "Available",
-    "image": "assets/images/05_modern_kitchen.jpg",
-    "images": [
-      "assets/images/05_modern_kitchen.jpg"
-    ]
+    "image": "assets/images/05_modern_kitchen.jpg"
   },
   {
     "id": 5,
@@ -72,10 +47,7 @@
     "mode": "Lease",
     "kind": "Commercial",
     "tag": "Available",
-    "image": "assets/images/06_rooftop_pool_terrace.jpg",
-    "images": [
-      "assets/images/06_rooftop_pool_terrace.jpg"
-    ]
+    "image": "assets/images/06_rooftop_pool_terrace.jpg"
   },
   {
     "id": 6,
@@ -85,9 +57,6 @@
     "mode": "Sale",
     "kind": "Residential",
     "tag": "Available",
-    "image": "assets/images/03_dining_room.jpg",
-    "images": [
-      "assets/images/03_dining_room.jpg"
-    ]
+    "image": "assets/images/03_dining_room.jpg"
   }
 ]

@@ -43,6 +43,20 @@ function draw(){
   a.appendChild(pic);a.appendChild(b);pl.appendChild(a)})}
 if(pl&&fb)load("properties").then(function(d){P=d;draw()});
 
+/* Mobile: keep every section heading on one line (one shared size, measured with the real font) */
+function fitHeads(){
+ var root=document.documentElement,hs=[].slice.call(document.querySelectorAll("h2"));
+ root.classList.remove("hwrap");root.style.removeProperty("--hfs");
+ if(!window.matchMedia("(max-width:700px)").matches||!hs.length)return;
+ root.style.setProperty("--hfs","20px");
+ var min=26;
+ hs.forEach(function(h){var r=document.createRange();r.selectNodeContents(h);var w=r.getBoundingClientRect().width,av=h.clientWidth;if(w>0&&av>0)min=Math.min(min,20*av/w)});
+ min=Math.floor(min*0.97*10)/10;
+ if(min<12){min=12;root.classList.add("hwrap")}
+ root.style.setProperty("--hfs",min+"px")}
+fitHeads();window.addEventListener("resize",fitHeads);window.addEventListener("load",fitHeads);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitHeads);
+
 /* Careers (data/careers.json, edited from /admin) */
 var jb=$("#jobs");
 if(jb)load("careers").then(function(d){
