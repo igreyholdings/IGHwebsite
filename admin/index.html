@@ -18,21 +18,21 @@ input,select,textarea{background:#031a19;border:1px solid var(--line);border-rad
 @media(max-width:640px){.g{grid-template-columns:1fr}.row{flex-wrap:wrap}}
 </style></head><body><div class="w" id="app"></div><div id="t" role="status"></div>
 <script>
-var API="api.php",app=document.getElementById("app"),S={properties:[],careers:[]},tab="properties";
+var LOCAL=false,API="/api/admin",app=document.getElementById("app"),S={properties:[],careers:[]},tab="properties";
 var SC={properties:[["title","Title","text"],["location","Location","text"],["price","Price / rent","text"],["mode","For","select",["Sale","Rent","Lease"]],["kind","Type","select",["Residential","Commercial","Land & Plots","Other"]],["tag","Label","select",["Available","Upcoming","Limited offer","Sold"]],["image","Photo","image"]],
 careers:[["title","Job title","text"],["department","Department","text"],["location","Location","text"],["type","Type","select",["Full-time","Part-time","Contract","Internship"]],["experience","Experience","text"],["status","Status","select",["Open","Closed"]],["description","Description","textarea"]]};
 function h(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function toast(x){var t=document.getElementById("t");t.textContent=x;t.style.display="block";setTimeout(function(){t.style.display="none"},2500)}
 function api(a,body,form){var o={method:body?"POST":"GET",credentials:"same-origin"};if(body){if(form)o.body=body;else{o.body=JSON.stringify(body);o.headers={"Content-Type":"application/json"}}}
  return fetch(API+"?a="+a,o).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||"Error");return j})})}
-function init(){api("me").then(function(j){j.auth?load():login()}).catch(function(){app.textContent="Cannot reach api.php. Upload the site to a PHP host."})}
+function init(){fetch(API+"?a=me",{credentials:"same-origin"}).then(function(r){return r.text().then(function(t){var j;try{j=JSON.parse(t)}catch(e){LOCAL=true;load();return}j.auth?load():login()})}).catch(function(){LOCAL=true;load()})}
 function login(){app.textContent="";var c=h("div","card");c.style.maxWidth="360px";c.style.margin="80px auto";c.appendChild(h("h2","","iGREY Admin"));
  var l=h("label","","Password"),i=h("input");i.type="password";l.appendChild(i);l.style.marginTop="16px";c.appendChild(l);var b=h("button","","Sign in");
  function go(){api("login",{password:i.value}).then(load).catch(function(e){toast(e.message)})}b.onclick=go;i.onkeydown=function(e){if(e.key=="Enter")go()};c.appendChild(b);app.appendChild(c);i.focus()}
-function load(){Promise.all(["properties","careers"].map(function(f){return fetch("../data/"+f+".json?v="+Date.now()).then(function(r){return r.json()}).catch(function(){return[]}).then(function(d){S[f]=d})})).then(list)}
-function save(f,msg){return api("save",{file:f,items:S[f]}).then(function(){toast(msg||"Saved")}).catch(function(e){toast(e.message);throw e})}
-function shell(){app.textContent="";var b=h("div","bar");b.appendChild(h("h1","","iGREY Admin"));var o=h("button","s","Sign out");o.onclick=function(){api("logout",{}).then(login)};b.appendChild(o);app.appendChild(b);
- var t=h("div","tabs");[["properties","Properties"],["careers","Careers"]].forEach(function(x){var k=h("button",tab==x[0]?"on":"",x[1]);k.onclick=function(){tab=x[0];list()};t.appendChild(k)});app.appendChild(t)}
+function load(){Promise.all(["properties","careers"].map(function(f){if(!LOCAL)return api("get",{file:f}).then(function(j){S[f]=j.items});var ls=LOCAL&&localStorage.getItem("igh_"+f);if(ls){try{S[f]=JSON.parse(ls);return}catch(e){}}return fetch("../data/"+f+".json?v="+Date.now()).then(function(r){return r.json()}).catch(function(){return[]}).then(function(d){S[f]=d})})).then(list).catch(function(e){app.textContent="Could not load data: "+e.message})}
+function save(f,msg){if(LOCAL){localStorage.setItem("igh_"+f,JSON.stringify(S[f]));toast(msg||"Saved in this browser");return Promise.resolve()}return api("save",{file:f,items:S[f]}).then(function(){toast(msg||"Saved. The live site updates in about a minute.")}).catch(function(e){toast(e.message);throw e})}
+function shell(){app.textContent="";var b=h("div","bar");b.appendChild(h("h1","","iGREY Admin"));var o=h("button","s","Sign out");if(!LOCAL){o.onclick=function(){api("logout",{}).then(login)};b.appendChild(o)}app.appendChild(b);
+ var t=h("div","tabs");[["properties","Properties"],["careers","Careers"]].forEach(function(x){var k=h("button",tab==x[0]?"on":"",x[1]);k.onclick=function(){tab=x[0];list()};t.appendChild(k)});app.appendChild(t);if(LOCAL){var n=h("div","card","Local mode: this host does not run PHP, so changes are saved in this browser only. To publish them, download the files below and upload them to your site's data folder, replacing the old ones.");n.style.borderColor="var(--gold)";["properties","careers"].forEach(function(f){var d=h("button","s","Download "+f+".json");d.style.margin="10px 8px 0 0";d.onclick=function(){var l=h("a");l.href=URL.createObjectURL(new Blob([JSON.stringify(S[f],null,2)],{type:"application/json"}));l.download=f+".json";l.click()};n.appendChild(d)});app.appendChild(n)}}
 function list(){shell();var add=h("button","","+ Add "+(tab=="properties"?"property":"job opening"));add.style.marginBottom="14px";add.onclick=function(){form({})};app.appendChild(add);
  if(!S[tab].length)app.appendChild(h("p","m","Nothing here yet."));
  S[tab].forEach(function(it){var c=h("div","card"),r=h("div","row");
@@ -44,8 +44,9 @@ function form(it){shell();var c=h("div","card"),g=h("div","g"),V={};c.appendChil
  SC[tab].forEach(function(f){var l=h("label","",f[1]),i;
   if(f[2]=="select"){i=h("select");f[3].forEach(function(o){var op=h("option","",o);op.value=o;i.appendChild(op)});i.value=it[f[0]]||f[3][0]}
   else if(f[2]=="textarea"){i=h("textarea");i.value=it[f[0]]||""}
+  else if(f[2]=="image"&&LOCAL){i=h("input");i.value=it[f[0]]||"";i.placeholder="e.g. assets/images/my-photo.jpg (upload the photo to the site first)"}
   else if(f[2]=="image"){i=h("input");i.type="hidden";i.value=it[f[0]]||"";var p=h("div","th");p.style.cssText="width:120px;height:80px";if(i.value)p.style.backgroundImage='url("'+encodeURI("../"+i.value)+'")';
-   var u=h("input");u.type="file";u.accept="image/jpeg,image/png,image/webp";u.onchange=function(){var fd=new FormData();fd.append("file",u.files[0]);api("upload",fd,true).then(function(j){i.value=j.path;p.style.backgroundImage='url("'+encodeURI("../"+j.path)+'")';toast("Image uploaded")}).catch(function(e){toast(e.message)})};l.appendChild(p);l.appendChild(u)}
+   var u=h("input");u.type="file";u.accept="image/jpeg,image/png,image/webp";u.onchange=function(){var f=u.files[0];if(!f)return;var im=new Image(),url=URL.createObjectURL(f);im.onload=function(){var s=Math.min(1,1600/Math.max(im.width,im.height)),cv=document.createElement("canvas");cv.width=Math.round(im.width*s);cv.height=Math.round(im.height*s);cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);toast("Uploading…");api("upload",{data:cv.toDataURL("image/jpeg",.85).split(",")[1]}).then(function(j){i.value=j.path;p.style.backgroundImage='url("'+url+'")';toast("Image uploaded")}).catch(function(e){toast(e.message)})};im.src=url};l.appendChild(p);l.appendChild(u)}
   else{i=h("input");i.value=it[f[0]]||""}
   V[f[0]]=i;l.appendChild(i);if(f[2]=="textarea")l.style.gridColumn="1/-1";g.appendChild(l)});
  c.appendChild(g);var s=h("button","","Save"),k=h("button","s","Cancel");k.style.marginLeft="8px";k.onclick=list;

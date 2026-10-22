@@ -11,17 +11,22 @@
 <header><div class="wrap"><nav aria-label="Main">
 <a class="logo" href="index.html#home" aria-label="iGREY Holdings home"><img src="assets/logo-white.png" alt="iGREY Holdings" width="156" height="46"></a>
 <button class="menu" aria-expanded="false" aria-controls="nl">Menu</button>
-<ul id="nl"><li><a href="index.html#home">Home</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#services">Services</a></li><li><a href="index.html#properties">Properties</a></li><li><a href="index.html#owners">Owners</a></li><li><a href="careers.html">Careers</a></li><li><a href="index.html#contact">Contact</a></li></ul>
+<ul id="nl"><li><a href="index.html#home">Home</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#services">Services</a></li><li><a href="careers.html">Careers</a></li><li><a href="index.html#contact">Contact</a></li></ul>
 </nav></div></header>
 <main>
 <section style="padding-top:150px"><div class="wrap"><p class="kicker">Careers</p><h2>Build your career with iGREY Holdings.</h2>
 <p style="margin-top:20px">Join a team that connects property services across buying, selling, renting, leasing, construction, investment and asset management. Explore the current openings below or send us your profile.</p></div></section>
 <section class="alt"><div class="wrap"><h2>Current openings</h2><div class="grid g3" id="jobs" aria-live="polite"><p>Loading openings…</p></div></div></section>
 <section id="apply"><div class="wrap" style="max-width:860px"><p class="kicker">Apply</p><h2 style="margin-bottom:28px">Send us your application.</h2>
-<form id="af" class="card"><input type="hidden" name="kind" value="Career application"><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+<form id="af" class="card" action="https://formsubmit.co/hello@igreyholdings.com" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="_subject" value="New career application - iGREY Holdings">
+<input type="hidden" name="_next" value="https://igreyholdings.com/thanks.html">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_autoresponse" value="Hello, thank you for applying to iGREY Holdings. We have received your application and resume, and our team will contact you if your profile matches an opening. Regards, iGREY Holdings, hello@igreyholdings.com">
+<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 <div class="row"><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div>
 <div class="row"><label>Phone<input name="phone" type="tel" required autocomplete="tel"></label><label>Role<select name="role" id="role"></select></label></div>
-<label>LinkedIn or portfolio link<input name="link" type="url" placeholder="https://"></label>
+<label>Resume (PDF, DOC or DOCX, max 5 MB)<input name="attachment" type="file" accept=".pdf,.doc,.docx,application/pdf" required></label>
 <label>Cover note<textarea name="msg" placeholder="Tell us about your experience"></textarea></label>
 <label style="display:flex;gap:10px;align-items:flex-start;color:var(--mute)"><input type="checkbox" required style="width:auto;margin-top:4px">I consent to iGREY Holdings contacting me about this application.</label>
 <button class="btn pri" type="submit">Submit application</button><p class="ok" id="aok" role="status"></p></form></div></section>

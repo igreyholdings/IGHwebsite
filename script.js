@@ -30,9 +30,9 @@ if(jb)load("careers").then(function(d){
  var o=d.filter(function(j){return j.status!="Closed"}),sel=$("#role");jb.textContent="";
  if(!o.length)jb.appendChild(h("p","","No openings right now. Send your profile with the form below and we will keep it on file."));
  o.forEach(function(j){
-  var c=h("article","card");c.appendChild(h("h3","",j.title));
+  var c=h("article","card job");c.appendChild(h("h3","",j.title));
   var mt=h("p","meta",[j.department,j.location,j.type,j.experience].filter(Boolean).join(" · "));mt.style.textAlign="left";c.appendChild(mt);
-  var ds=h("p","",j.description||"");ds.style.margin="10px 0";c.appendChild(ds);
+  var ds=h("p","",j.description||"");ds.style.margin="10px 0 18px";c.appendChild(ds);
   var a=h("a","btn sec","Apply for this role");a.href="#apply";a.onclick=function(){sel.value=j.title};c.appendChild(a);jb.appendChild(c);
   var op=h("option","",j.title);op.value=j.title;sel.appendChild(op)});
  var g=h("option","","General application");g.value="General application";sel.appendChild(g)});
@@ -42,9 +42,9 @@ function wire(form,msg){
  if(!form)return;
  form.onsubmit=function(e){
   e.preventDefault();var b=form.querySelector("button[type=submit]"),old=b.textContent;b.disabled=true;b.textContent="Sending…";
-  fetch("send-enquiry.php",{method:"POST",body:new FormData(form)}).then(function(r){return r.json()}).then(function(j){
-   if(!j.ok)throw 0;msg.textContent="Thank you. We have received your message and sent a confirmation to your email.";form.reset()
-  }).catch(function(){msg.textContent="Sorry, we could not send your message. Please email hello@igreyholdings.com or call +91 8147172449."
+  fetch("send-enquiry.php",{method:"POST",body:new FormData(form)}).then(function(r){return r.json().catch(function(){console.error("send-enquiry.php returned HTTP "+r.status+" and no JSON. PHP may not be running on this host.");return{ok:false}})}).then(function(j){
+   if(!j.ok)throw new Error(j.error||"");msg.textContent="Thank you. We have received your message and sent a confirmation to your email.";form.reset()
+  }).catch(function(e){msg.textContent=(e&&e.message)?e.message:"Sorry, we could not send your message. Please email hello@igreyholdings.com or call +91 8147172449."
   }).then(function(){msg.style.display="block";b.disabled=false;b.textContent=old})}}
-wire($("#cf"),$("#ok"));wire($("#af"),$("#aok"));
+
 })();
