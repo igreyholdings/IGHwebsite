@@ -1,21 +1,50 @@
-var P=[
-{t:"Executive 3 BHK Residence",loc:"Gated society, Bangalore",price:"₹85 L",mode:"Sale",kind:"Residential",tag:"Upcoming",img:"--i2"},
-{t:"Skyline Apartment Residences",loc:"Gated society, Bangalore",price:"₹1.2 Cr",mode:"Sale",kind:"Residential",tag:"Available",img:"--i1"},
-{t:"Garden View 3 BHK Home",loc:"Gated society, Mysuru",price:"₹95 L",mode:"Sale",kind:"Residential",tag:"Limited offer",img:"--i4"},
-{t:"Family 2 BHK Apartment",loc:"Bilekahalli, Bangalore",price:"₹32,000 / month",mode:"Rent",kind:"Residential",tag:"Available",img:"--i5"},
-{t:"Rooftop Pool Terrace Lounge",loc:"Bannerghatta Road, Bangalore",price:"₹1.1 L / month",mode:"Lease",kind:"Commercial",tag:"Available",img:"--i6"},
-{t:"Premium 4 BHK Dining Residence",loc:"Gated society, Bangalore",price:"₹1.5 Cr",mode:"Sale",kind:"Residential",tag:"Available",img:"--i3"}];
-var F=["All Properties","For Sale","For Rent","For Lease","Residential","Commercial","Land & Plots"];
-var cur="All Properties",fb=document.getElementById("filters"),pl=document.getElementById("plist");
-function ok(p){return cur=="All Properties"||(cur=="For Sale"&&p.mode=="Sale")||(cur=="For Rent"&&p.mode=="Rent")||(cur=="For Lease"&&p.mode=="Lease")||cur==p.kind}
+(function(){
+var $=function(s){return document.querySelector(s)};
+function h(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function load(f){return fetch("data/"+f+".json?v="+Date.now()).then(function(r){return r.json()}).catch(function(){return[]})}
+var m=$(".menu"),nl=$("#nl");
+if(m&&nl){m.onclick=function(){var o=nl.classList.toggle("open");m.setAttribute("aria-expanded",o)};nl.onclick=function(){nl.classList.remove("open");m.setAttribute("aria-expanded","false")}}
+document.querySelectorAll("[data-type]").forEach(function(a){a.addEventListener("click",function(){var t=$("#ctype");if(t)t.value=a.dataset.type})});
+
+/* Properties (data/properties.json, edited from /admin) */
+var pl=$("#plist"),fb=$("#filters"),F=["All Properties","For Sale","For Rent","For Lease","Residential","Commercial","Land & Plots"],cur=F[0],P=[];
+function ok(p){return cur==F[0]||(cur=="For Sale"&&p.mode=="Sale")||(cur=="For Rent"&&p.mode=="Rent")||(cur=="For Lease"&&p.mode=="Lease")||cur==p.kind}
 function draw(){
- fb.innerHTML="";F.forEach(function(f){var b=document.createElement("button");b.className="chip";b.textContent=f;b.setAttribute("aria-pressed",f==cur);b.onclick=function(){cur=f;draw()};fb.appendChild(b)});
- var l=P.filter(ok);
- pl.innerHTML=l.length?l.map(function(p){return '<article class="card prop"><div class="pic" role="img" aria-label="'+p.t+'" style="background-image:var('+p.img+')"><span class="tag">'+p.tag+'</span></div><div class="pb"><span class="price">'+p.price+'</span><span class="meta">'+p.kind+' · For '+p.mode+'</span><h3 style="margin:8px 0 4px">'+p.t+'</h3><p class="meta" style="margin-bottom:14px">'+p.loc+'</p><a href="#contact" class="gold" style="font-weight:600;text-decoration:none">Enquire about this property</a></div></article>'}).join(""):'<p>No listings match this filter yet.</p>';
-}
-draw();
-var m=document.querySelector(".menu"),nl=document.getElementById("nl");
-m.onclick=function(){var o=nl.classList.toggle("open");m.setAttribute("aria-expanded",o)};
-nl.onclick=function(){nl.classList.remove("open");m.setAttribute("aria-expanded","false")};
-document.querySelectorAll("[data-type]").forEach(function(a){a.addEventListener("click",function(){document.getElementById("ctype").value=a.dataset.type})});
-document.getElementById("cf").onsubmit=function(e){e.preventDefault();document.getElementById("ok").style.display="block";this.reset()};
+ fb.textContent="";F.forEach(function(f){var b=h("button","chip",f);b.setAttribute("aria-pressed",f==cur);b.onclick=function(){cur=f;draw()};fb.appendChild(b)});
+ pl.textContent="";var l=P.filter(ok);
+ if(!l.length){pl.appendChild(h("p","","No listings match this filter yet."));return}
+ l.forEach(function(p){
+  var a=h("article","card prop"),pic=h("div","pic");pic.setAttribute("role","img");pic.setAttribute("aria-label",p.title||"Property");
+  if(p.image)pic.style.backgroundImage='url("'+encodeURI(p.image).replace(/"/g,"%22")+'")';
+  pic.appendChild(h("span","tag",p.tag||"Available"));
+  var b=h("div","pb");b.appendChild(h("span","price",p.price||""));b.appendChild(h("span","meta",(p.kind||"")+" · For "+(p.mode||"")));
+  var t=h("h3","",p.title);t.style.margin="8px 0 4px";b.appendChild(t);
+  var lc=h("p","meta",p.location||"");lc.style.marginBottom="14px";b.appendChild(lc);
+  var e=h("a","gold","Enquire about this property");e.href="#contact";e.style.cssText="font-weight:600;text-decoration:none";b.appendChild(e);
+  a.appendChild(pic);a.appendChild(b);pl.appendChild(a)})}
+if(pl&&fb)load("properties").then(function(d){P=d;draw()});
+
+/* Careers (data/careers.json, edited from /admin) */
+var jb=$("#jobs");
+if(jb)load("careers").then(function(d){
+ var o=d.filter(function(j){return j.status!="Closed"}),sel=$("#role");jb.textContent="";
+ if(!o.length)jb.appendChild(h("p","","No openings right now. Send your profile with the form below and we will keep it on file."));
+ o.forEach(function(j){
+  var c=h("article","card");c.appendChild(h("h3","",j.title));
+  var mt=h("p","meta",[j.department,j.location,j.type,j.experience].filter(Boolean).join(" · "));mt.style.textAlign="left";c.appendChild(mt);
+  var ds=h("p","",j.description||"");ds.style.margin="10px 0";c.appendChild(ds);
+  var a=h("a","btn sec","Apply for this role");a.href="#apply";a.onclick=function(){sel.value=j.title};c.appendChild(a);jb.appendChild(c);
+  var op=h("option","",j.title);op.value=j.title;sel.appendChild(op)});
+ var g=h("option","","General application");g.value="General application";sel.appendChild(g)});
+
+/* Forms -> send-enquiry.php (mails hello@igreyholdings.com and auto-replies to the sender) */
+function wire(form,msg){
+ if(!form)return;
+ form.onsubmit=function(e){
+  e.preventDefault();var b=form.querySelector("button[type=submit]"),old=b.textContent;b.disabled=true;b.textContent="Sending…";
+  fetch("send-enquiry.php",{method:"POST",body:new FormData(form)}).then(function(r){return r.json()}).then(function(j){
+   if(!j.ok)throw 0;msg.textContent="Thank you. We have received your message and sent a confirmation to your email.";form.reset()
+  }).catch(function(){msg.textContent="Sorry, we could not send your message. Please email hello@igreyholdings.com or call +91 8147172449."
+  }).then(function(){msg.style.display="block";b.disabled=false;b.textContent=old})}}
+wire($("#cf"),$("#ok"));wire($("#af"),$("#aok"));
+})();

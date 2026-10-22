@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Executive 3 BHK Residence",
+    "location": "Gated society, Bangalore",
+    "price": "₹85 L",
+    "mode": "Sale",
+    "kind": "Residential",
+    "tag": "Upcoming",
+    "image": "assets/images/02_luxury_living_room.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Skyline Apartment Residences",
+    "location": "Gated society, Bangalore",
+    "price": "₹1.2 Cr",
+    "mode": "Sale",
+    "kind": "Residential",
+    "tag": "Available",
+    "image": "assets/images/01_apartment_building_exterior.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Garden View 3 BHK Home",
+    "location": "Gated society, Mysuru",
+    "price": "₹95 L",
+    "mode": "Sale",
+    "kind": "Residential",
+    "tag": "Limited offer",
+    "image": "assets/images/04_bedroom.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Family 2 BHK Apartment",
+    "location": "Bilekahalli, Bangalore",
+    "price": "₹32,000 / month",
+    "mode": "Rent",
+    "kind": "Residential",
+    "tag": "Available",
+    "image": "assets/images/05_modern_kitchen.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Rooftop Pool Terrace Lounge",
+    "location": "Bannerghatta Road, Bangalore",
+    "price": "₹1.1 L / month",
+    "mode": "Lease",
+    "kind": "Commercial",
+    "tag": "Available",
+    "image": "assets/images/06_rooftop_pool_terrace.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Premium 4 BHK Dining Residence",
+    "location": "Gated society, Bangalore",
+    "price": "₹1.5 Cr",
+    "mode": "Sale",
+    "kind": "Residential",
+    "tag": "Available",
+    "image": "assets/images/03_dining_room.jpg"
+  }
+]
