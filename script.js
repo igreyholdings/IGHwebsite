@@ -76,6 +76,58 @@ if(jb)load("careers").then(function(d){
   var op=h("option","",j.title);op.value=j.title;sel.appendChild(op)});
  var g=h("option","","General application");g.value="General application";sel.appendChild(g)});
 
+/* WhatsApp: floating button on every page (change the number or message here) */
+var WA_NUMBER="918147172449",WA_TEXT="Hello iGREY Holdings, I would like to know more about your property services.";
+(function(){
+ var a=h("a","wa");a.href="https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(WA_TEXT);a.target="_blank";a.rel="noopener noreferrer";
+ a.setAttribute("aria-label","Chat with us on WhatsApp");a.title="Chat with us on WhatsApp";
+ a.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>';
+ document.body.appendChild(a)})();
+
+/* Contact form: dropdown lists open right under the field (no full-screen pop-up) */
+function dropdown(sel){
+ var lab=sel.closest("label"),wrap=h("div","dd"),btn=h("button","dd-btn"),txt=h("span","dd-txt"),list=h("ul","dd-list"),opts=[],cur=0,hl=0,isOpen=false;
+ btn.type="button";btn.setAttribute("aria-haspopup","listbox");btn.setAttribute("aria-expanded","false");
+ btn.appendChild(txt);btn.insertAdjacentHTML("beforeend",'<svg class="dd-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
+ list.setAttribute("role","listbox");list.hidden=true;
+ [].forEach.call(sel.options,function(o,k){var li=h("li","dd-opt",o.textContent);li.setAttribute("role","option");li.id=(sel.name||"dd")+"-opt-"+k;opts.push(li);list.appendChild(li)});
+ function sync(){cur=Math.max(0,sel.selectedIndex);txt.textContent=sel.options[cur]?sel.options[cur].textContent:"";opts.forEach(function(li,k){li.setAttribute("aria-selected",k==cur)})}
+ function mark(k){hl=Math.max(0,Math.min(opts.length-1,k));opts.forEach(function(li,i){li.classList.toggle("hl",i==hl)});btn.setAttribute("aria-activedescendant",opts[hl].id);opts[hl].scrollIntoView({block:"nearest"})}
+ function open(){if(isOpen)return;isOpen=true;list.hidden=false;wrap.classList.add("open");btn.setAttribute("aria-expanded","true");mark(cur);
+  var r=list.getBoundingClientRect();if(r.bottom>innerHeight-10)window.scrollBy({top:r.bottom-innerHeight+20,behavior:"smooth"})}
+ function close(){if(!isOpen)return;isOpen=false;list.hidden=true;wrap.classList.remove("open");btn.setAttribute("aria-expanded","false");btn.removeAttribute("aria-activedescendant")}
+ function pick(k){sel.selectedIndex=k;sel.dispatchEvent(new Event("change",{bubbles:true}));sync();close();btn.focus()}
+ btn.onclick=function(){isOpen?close():open()};
+ list.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();var li=e.target.closest(".dd-opt");if(li)pick(opts.indexOf(li))});
+ list.addEventListener("mousemove",function(e){var li=e.target.closest(".dd-opt");if(li){var k=opts.indexOf(li);if(k!=hl){hl=k;opts.forEach(function(x,i){x.classList.toggle("hl",i==k)})}}});
+ btn.addEventListener("keydown",function(e){
+  var k=e.key;
+  if(k=="ArrowDown"||k=="ArrowUp"){e.preventDefault();if(!isOpen)open();else mark(hl+(k=="ArrowDown"?1:-1))}
+  else if(k=="Home"&&isOpen){e.preventDefault();mark(0)}else if(k=="End"&&isOpen){e.preventDefault();mark(opts.length-1)}
+  else if((k=="Enter"||k==" ")&&isOpen){e.preventDefault();pick(hl)}
+  else if(k=="Escape"&&isOpen){e.preventDefault();close()}
+  else if(k=="Tab")close()
+  else if(k.length==1&&!e.ctrlKey&&!e.metaKey){var n=opts.findIndex(function(li,i){return i>(isOpen?hl:cur)&&li.textContent.charAt(0).toLowerCase()==k.toLowerCase()});if(n<0)n=opts.findIndex(function(li){return li.textContent.charAt(0).toLowerCase()==k.toLowerCase()});if(n>=0){isOpen?mark(n):pick(n)}}});
+ document.addEventListener("click",function(e){if(!wrap.contains(e.target))close()});
+ /* keep the pretty label in step when the page sets the value itself (e.g. data-type links) or the form resets */
+ var d=Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype,"value");
+ Object.defineProperty(sel,"value",{get:function(){return d.get.call(sel)},set:function(v){d.set.call(sel,v);sync()}});
+ if(sel.form)sel.form.addEventListener("reset",function(){setTimeout(sync,0)});
+ sel.classList.add("dd-native");sel.tabIndex=-1;sel.setAttribute("aria-hidden","true");
+ wrap.appendChild(btn);wrap.appendChild(list);lab.insertBefore(wrap,sel);sync()}
+document.querySelectorAll("#cf select").forEach(dropdown);
+
+/* Client reviews: a single row that drifts left by itself (pauses on hover/touch) */
+(function(){
+ var rv=$(".rv");if(!rv||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))return;
+ var w=h("div","rvwrap");rv.parentNode.insertBefore(w,rv);w.appendChild(rv);
+ [].slice.call(rv.children).forEach(function(c){var k=c.cloneNode(true);k.setAttribute("aria-hidden","true");rv.appendChild(k)});
+ rv.classList.add("rv-on");
+ function speed(){rv.style.setProperty("--rvdur",Math.max(24,rv.scrollWidth/2/45)+"s")}
+ speed();window.addEventListener("resize",speed);window.addEventListener("load",speed);
+ var t;w.addEventListener("touchstart",function(){clearTimeout(t);w.classList.add("paused")},{passive:true});
+ w.addEventListener("touchend",function(){t=setTimeout(function(){w.classList.remove("paused")},2500)},{passive:true})})();
+
 /* Forms -> send-enquiry.php (mails hello@igreyholdings.com and auto-replies to the sender) */
 function wire(form,msg){
  if(!form)return;
