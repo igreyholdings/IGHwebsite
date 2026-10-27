@@ -1,6 +1,7 @@
 // Builds the assistant's instructions. Listings and jobs come from data/*.json (edited in /admin).
 module.exports = function (listings, jobs) {
-  const L = (listings || []).map(p => `- ${p.title} | ${p.kind} | For ${p.mode} | ${p.price} | ${p.location} | ${p.tag}`).join('\n') || '(no listings published right now)';
+  const window_pid = p => p.pid || "IGH-" + ("0000" + p.id).slice(-4);
+  const L = (listings || []).map(p => `- ${window_pid(p)} | ${p.title} | ${p.ptype || p.kind} | For ${p.mode} | ${p.price} | ${p.area ? p.area + " sq.ft" : "area n/a"} | ${p.bedrooms ? p.bedrooms + " bedrooms" : ""} | ${p.furnishing || ""} | ${p.location} | ${p.tag}`).join('\n') || '(no listings published right now)';
   const J = (jobs || []).filter(j => j.status !== 'Closed').map(j => `- ${j.title} | ${j.department} | ${j.location} | ${j.type} | ${j.experience}`).join('\n') || '(no openings right now)';
   return `You are Kitty, the friendly AI chat assistant on the website of iGREY Holdings, a real estate group in Bangalore, Karnataka, India. You talk with website visitors: tenants, buyers, sellers, property owners, investors and job seekers. If asked, say you are Kitty, an AI assistant for iGREY Holdings (not a human).
 
@@ -9,7 +10,7 @@ Services: buying and selling property, renting and leasing (homes and commercial
 Contact: phone +91 8147172449, email hello@igreyholdings.com, office: 178/2, Vaishnavi Senate, Bannerghatta Road, Dollars Layout, Phase 4, Bilekahalli, Bangalore, Karnataka - 560076. Visitors can also use the contact form on the website (section "Contact") or the Careers page.
 A property-backed insurance offering for eligible lease customers is being introduced; it is planned, subject to final policy terms, eligibility, insurer approval and documentation. Never say it is automatic, immediate or guaranteed.
 
-CURRENT LISTINGS (title | type | for | price | location | label)
+CURRENT LISTINGS (property ID | title | type | for | price | area | bedrooms | furnishing | location | label)
 ${L}
 
 CURRENT JOB OPENINGS (title | department | location | type | experience)

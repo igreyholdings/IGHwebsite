@@ -16,10 +16,12 @@ input,select,textarea{background:#031a19;border:1px solid var(--line);border-rad
 .m{color:var(--mint);font-size:.82rem}.g{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
 #t{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;padding:10px 18px;border-radius:8px;display:none;font-weight:600}
 @media(max-width:640px){.g{grid-template-columns:1fr}.row{flex-wrap:wrap}}
-</style></head><body><div class="w" id="app"></div><div id="t" role="status"></div>
+.chk{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px 14px;margin-top:8px}.ck{display:flex;gap:8px;align-items:center;color:#fff;font-size:.88rem;margin:0}.ck input{width:auto}
+</style><script src="../amenities.js"></script>
+</head><body><div class="w" id="app"></div><div id="t" role="status"></div>
 <script>
 var LOCAL=false,API="/api/admin",app=document.getElementById("app"),S={properties:[],careers:[]},tab="properties";
-var SC={properties:[["title","Title","text"],["location","Location","text"],["price","Price / rent","text"],["mode","For","select",["Sale","Rent","Lease"]],["kind","Type","select",["Residential","Commercial","Land & Plots","Other"]],["tag","Label","select",["Available","Upcoming","Limited offer","Sold"]],["images","Photos (first one is the cover)","images"]],
+var SC={properties:[["title","Title","text"],["location","Location","text"],["price","Price / rent","text"],["mode","For","select",["Sale","Rent","Lease"]],["kind","Category","select",["Residential","Commercial","Land & Plots","Other"]],["tag","Label","select",["Available","Upcoming","Limited offer","Sold"]],["pid","Property ID","text"],["ptype","Property type","select",["Flat / Apartment","Independent house","Builder floor","Villa","Plot / Land","Office space","Shop / Showroom","Co-working space","Warehouse","Other"]],["area","Area (sq.ft)","text"],["bedrooms","Bedrooms","text"],["bathrooms","Bathrooms","text"],["furnishing","Furnished type","select",["Unfurnished","Semi-furnished","Fully furnished","Not applicable"]],["images","Photos (first one is the cover)","images"],["description","Property description","textarea"],["amenities","Amenities","checks"]],
 careers:[["title","Job title","text"],["department","Department","text"],["location","Location","text"],["type","Type","select",["Full-time","Part-time","Contract","Internship"]],["experience","Experience","text"],["status","Status","select",["Open","Closed"]],["description","Description","textarea"]]};
 function h(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function toast(x){var t=document.getElementById("t");t.textContent=x;t.style.display="block";setTimeout(function(){t.style.display="none"},2500)}
@@ -37,7 +39,7 @@ function list(){shell();var add=h("button","","+ Add "+(tab=="properties"?"prope
  if(!S[tab].length)app.appendChild(h("p","m","Nothing here yet."));
  S[tab].forEach(function(it){var c=h("div","card"),r=h("div","row");
   if(tab=="properties"){var th=h("div","th");var c0=(it.images&&it.images[0])||it.image;if(c0)th.style.backgroundImage='url("'+encodeURI("../"+c0)+'")';r.appendChild(th)}
-  var d=h("div");d.appendChild(h("b","",it.title||"(untitled)"));d.appendChild(h("div","m",tab=="properties"?[it.price,it.kind,"For "+it.mode,it.location,it.tag,(it.images&&it.images.length>1?it.images.length+" photos":"")].filter(Boolean).join(" · "):[it.department,it.location,it.type,it.status].filter(Boolean).join(" · ")));r.appendChild(d);
+  var d=h("div");d.appendChild(h("b","",it.title||"(untitled)"));d.appendChild(h("div","m",tab=="properties"?[it.pid||("IGH-"+("0000"+it.id).slice(-4)),it.price,it.kind,"For "+it.mode,it.location,it.tag,(it.images&&it.images.length>1?it.images.length+" photos":"")].filter(Boolean).join(" · "):[it.department,it.location,it.type,it.status].filter(Boolean).join(" · ")));r.appendChild(d);
   var e=h("button","s","Edit");e.onclick=function(){form(it)};var x=h("button","d","Delete");x.onclick=function(){if(confirm("Delete \""+(it.title||"this item")+"\"?")){S[tab]=S[tab].filter(function(y){return y!==it});save(tab,"Deleted").then(list)}};
   r.appendChild(e);r.appendChild(x);c.appendChild(r);app.appendChild(c)})}
 
@@ -65,16 +67,20 @@ function imgsField(l,it,V,key){
   fs.reduce(function(chain,f){return chain.then(function(){return shrink(f).then(function(d){return api("upload",{data:d})}).then(function(j){arr.push(j.path)}).catch(function(e){toast(e.message)}).then(function(){up--;draw()})})},Promise.resolve()).then(function(){toast("Photos uploaded. Click Save to publish.")})};
  var hint=h("div","m","Select several photos at once (JPG, PNG or WebP). Use the arrows to reorder; the first photo is the cover.");hint.style.margin="4px 0 8px";
  box.appendChild(hint);box.appendChild(inp);l.appendChild(box);l.appendChild(grid);draw()}
+function nextId(){return S.properties.reduce(function(m,p){return Math.max(m,parseInt(p.id)||0)},0)+1}
+function nextPid(){return "IGH-"+("0000"+nextId()).slice(-4)}
 function form(it){shell();var c=h("div","card"),g=h("div","g"),V={};c.appendChild(h("h2","",(it.id?"Edit ":"Add ")+(tab=="properties"?"property":"job opening")));c.lastChild.style.marginBottom="16px";
  SC[tab].forEach(function(f){var l=h("label","",f[1]),i;
   if(f[2]=="select"){i=h("select");f[3].forEach(function(o){var op=h("option","",o);op.value=o;i.appendChild(op)});i.value=it[f[0]]||f[3][0]}
   else if(f[2]=="textarea"){i=h("textarea");i.value=it[f[0]]||""}
+  else if(f[2]=="checks"){var w=h("div");w.style.cssText="color:#a8e6cf;font-size:.85rem;margin-bottom:12px;grid-column:1/-1";w.appendChild(h("div","",f[1]));var cw=h("div","chk");(window.IGH_AMENITIES||[]).forEach(function(a){var cl=h("label","ck"),cb=h("input");cb.type="checkbox";cb.value=a;cb.checked=(it[f[0]]||[]).indexOf(a)>-1;cl.appendChild(cb);cl.appendChild(document.createTextNode(a));cw.appendChild(cl)});w.appendChild(cw);V[f[0]]={checks:cw};g.appendChild(w);return}
+  else if(f[0]=="pid"){i=h("input");i.value=it.pid||(it.id?"IGH-"+("0000"+it.id).slice(-4):nextPid())}
   else if(f[2]=="images"){imgsField(l,it,V,f[0]);g.appendChild(l);l.style.gridColumn="1/-1";return}
   else{i=h("input");i.value=it[f[0]]||""}
   V[f[0]]=i;l.appendChild(i);if(f[2]=="textarea")l.style.gridColumn="1/-1";g.appendChild(l)});
  c.appendChild(g);var s=h("button","","Save"),k=h("button","s","Cancel");k.style.marginLeft="8px";k.onclick=list;
- s.onclick=function(){var o=it.id?it:{id:Date.now()};if(!V.title.value.trim()){toast("Title is required");return}
-  if(tab=="properties"&&V.images.busy()){toast("Please wait for photos to finish uploading");return}SC[tab].forEach(function(f){if(f[2]=="images"){o.images=V.images.list();o.image=o.images[0]||"";return}o[f[0]]=V[f[0]].value.trim()});if(!it.id)S[tab].unshift(o);save(tab).then(list).catch(function(){})};
+ s.onclick=function(){var o=it.id?it:{id:tab=="properties"?nextId():Date.now()};if(!V.title.value.trim()){toast("Title is required");return}
+  if(tab=="properties"&&V.images.busy()){toast("Please wait for photos to finish uploading");return}SC[tab].forEach(function(f){if(f[2]=="images"){o.images=V.images.list();o.image=o.images[0]||"";return}if(f[2]=="checks"){o[f[0]]=[].slice.call(V[f[0]].checks.querySelectorAll("input:checked")).map(function(x){return x.value});return}o[f[0]]=V[f[0]].value.trim()});if(!it.id)S[tab].unshift(o);save(tab).then(list).catch(function(){})};
  c.appendChild(s);c.appendChild(k);app.appendChild(c)}
 init();
 </script></body></html>

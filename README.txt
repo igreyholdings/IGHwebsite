@@ -38,3 +38,9 @@ KITTY - AI CHAT ASSISTANT (chat button, bottom-right) - 100% FREE APIs
   If every free service is busy, Kitty politely asks the visitor to email hello@igreyholdings.com or call +91 8147172449.
   To change Kitty's name, greeting or quick-reply buttons edit chat.js; to change what Kitty knows or how she answers edit api/_prompt.js.
   The API keys stay on the server (Vercel) and are never visible in the website code.
+
+PROPERTY DETAILS, IDs AND ENQUIRIES
+  Each property has a Property ID (IGH-0001...), type (flat, villa, builder floor...), area in sq.ft, bedrooms, bathrooms,
+  furnished type, description and amenities (shown with icons on property.html). Edit them all in /admin.
+  "Enquire about this property" opens a form; the enquiry (with Property ID, title, price and link) is emailed to hello@igreyholdings.com
+  through FormSubmit, and the visitor gets an automatic reply. To add an amenity, add a line to amenities.js.

@@ -2,6 +2,9 @@
 var $=function(s){return document.querySelector(s)};
 function h(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function load(f){return fetch("data/"+f+".json?v="+Date.now()).then(function(r){return r.json()}).catch(function(){return[]})}
+/* Property helpers shared with property.js and enquiry.js */
+window.IGH_PID=function(p){return p.pid||"IGH-"+("0000"+p.id).slice(-4)};
+window.IGH_AREA=function(a){var n=parseFloat(String(a).replace(/,/g,""));return isFinite(n)?n.toLocaleString("en-IN")+" sq.ft":String(a)};
 var m=$(".menu"),nl=$("#nl");
 if(m&&nl){m.onclick=function(){var o=nl.classList.toggle("open");m.setAttribute("aria-expanded",o)};nl.onclick=function(){nl.classList.remove("open");m.setAttribute("aria-expanded","false")}}
 document.querySelectorAll("[data-type]").forEach(function(a){a.addEventListener("click",function(){var t=$("#ctype");if(t)t.value=a.dataset.type})});
@@ -25,7 +28,7 @@ function slider(pic,p){
  pic.appendChild(ct);pic.appendChild(dots);go(0);
  var x0=null;
  pic.addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
- pic.addEventListener("touchend",function(e){if(x0==null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40)go(i+(dx<0?1:-1))},{passive:true});
+ pic.addEventListener("touchend",function(e){if(x0==null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40){pic.dataset.swiped=Date.now();go(i+(dx<0?1:-1))}},{passive:true});
  pic.tabIndex=0;pic.addEventListener("keydown",function(e){if(e.key=="ArrowLeft")go(i-1);else if(e.key=="ArrowRight")go(i+1)});
 }
 function draw(){
@@ -37,9 +40,12 @@ function draw(){
   slider(pic,p);
   pic.appendChild(h("span","tag",p.tag||"Available"));
   var b=h("div","pb");b.appendChild(h("span","price",p.price||""));b.appendChild(h("span","meta",(p.kind||"")+" · For "+(p.mode||"")));
-  var t=h("h3","",p.title);t.style.margin="8px 0 4px";b.appendChild(t);
-  var lc=h("p","meta",p.location||"");lc.style.marginBottom="14px";b.appendChild(lc);
-  var e=h("a","gold","Enquire about this property");e.href="#contact";e.style.cssText="font-weight:600;text-decoration:none";b.appendChild(e);
+  var url="property.html?id="+encodeURIComponent(p.id);
+  var t=h("h3","");var ta=h("a","",p.title);ta.href=url;ta.style.cssText="color:inherit;text-decoration:none";t.appendChild(ta);t.style.margin="8px 0 4px";b.appendChild(t);
+  a.classList.add("link");a.onclick=function(e){if(e.target.closest("a,button")||Date.now()-(+pic.dataset.swiped||0)<500)return;location.href=url};
+  var lc=h("p","meta",p.location||"");lc.style.marginBottom="4px";b.appendChild(lc);
+  var idl=h("p","meta",[window.IGH_PID(p),p.ptype,p.area?window.IGH_AREA(p.area):""].filter(Boolean).join(" \u00B7 "));idl.style.margin="0 0 14px";b.appendChild(idl);
+  var e=h("button","btn enq","Enquire about this property");e.type="button";e.onclick=function(ev){ev.stopPropagation();window.IGH_ENQUIRE(p)};b.appendChild(e);
   a.appendChild(pic);a.appendChild(b);pl.appendChild(a)})}
 if(pl&&fb)load("properties").then(function(d){P=d;draw()});
 

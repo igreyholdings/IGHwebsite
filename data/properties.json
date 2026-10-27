@@ -18,6 +18,27 @@
       "assets/uploads/324af653ac2f6954.jpg",
       "assets/uploads/8f936d5a72eb6892.jpg",
       "assets/uploads/e394b26915306f61.jpg"
+    ],
+    "pid": "IGH-0001",
+    "ptype": "Flat / Apartment",
+    "area": "1850",
+    "bedrooms": "3",
+    "bathrooms": "3",
+    "furnishing": "Semi-furnished",
+    "description": "A spacious 3 BHK residence with good natural light, a well-planned layout and easy access to everyday conveniences. Part of a gated community with modern amenities.",
+    "amenities": [
+      "Lift",
+      "Power backup",
+      "Covered parking",
+      "24x7 security",
+      "CCTV surveillance",
+      "Gym",
+      "Swimming pool",
+      "Clubhouse",
+      "Children's play area",
+      "Garden / park",
+      "24x7 water supply",
+      "Intercom"
     ]
   },
   {
@@ -36,6 +57,23 @@
       "assets/uploads/9eef3e103a411eb4.jpg",
       "assets/uploads/41fca0a467adc963.jpg",
       "assets/uploads/8b51425463af8f0c.jpg"
+    ],
+    "pid": "IGH-0002",
+    "ptype": "Flat / Apartment",
+    "area": "1250",
+    "bedrooms": "2",
+    "bathrooms": "2",
+    "furnishing": "Unfurnished",
+    "description": "A well-designed 2 BHK flat in a modern apartment community, close to schools, shops and main roads. Ideal for a small family or first-time buyers.",
+    "amenities": [
+      "Lift",
+      "Power backup",
+      "Covered parking",
+      "24x7 security",
+      "CCTV surveillance",
+      "Children's play area",
+      "Garden / park",
+      "Fire safety"
     ]
   },
   {
@@ -54,6 +92,24 @@
       "assets/uploads/cea348d386b425f4.jpg",
       "assets/uploads/6edf426934926597.jpg",
       "assets/uploads/3040182bd8fc2da7.jpg"
+    ],
+    "pid": "IGH-0003",
+    "ptype": "Flat / Apartment",
+    "area": "1600",
+    "bedrooms": "3",
+    "bathrooms": "3",
+    "furnishing": "Semi-furnished",
+    "description": "A bright 3 BHK flat with city views, a balcony and community amenities. Move-in ready with wardrobes and kitchen fittings.",
+    "amenities": [
+      "Lift",
+      "Power backup",
+      "Covered parking",
+      "24x7 security",
+      "Gym",
+      "Swimming pool",
+      "Clubhouse",
+      "Balcony",
+      "Intercom"
     ]
   },
   {
@@ -73,6 +129,22 @@
       "assets/uploads/7b8266f5282aff90.jpg",
       "assets/uploads/0ce5738261c9c900.jpg",
       "assets/uploads/bb9b1bfeebde286e.jpg"
+    ],
+    "pid": "IGH-0004",
+    "ptype": "Flat / Apartment",
+    "area": "1500",
+    "bedrooms": "3",
+    "bathrooms": "2",
+    "furnishing": "Unfurnished",
+    "description": "A comfortable 3 BHK apartment available on lease, in a well-maintained gated society with parking and round-the-clock security.",
+    "amenities": [
+      "Lift",
+      "Power backup",
+      "Covered parking",
+      "24x7 security",
+      "CCTV surveillance",
+      "Community hall",
+      "Rainwater harvesting"
     ]
   },
   {
@@ -90,6 +162,23 @@
       "assets/uploads/cf1a35fd60ab20ba.jpg",
       "assets/uploads/aa3123286bf9625a.jpg",
       "assets/uploads/dc9943187d7df466.jpg"
+    ],
+    "pid": "IGH-0005",
+    "ptype": "Villa",
+    "area": "3200",
+    "bedrooms": "4",
+    "bathrooms": "4",
+    "furnishing": "Semi-furnished",
+    "description": "A semi-furnished 4 BHK villa with a private garden, terrace and parking, suited to families who want space and privacy.",
+    "amenities": [
+      "Covered parking",
+      "24x7 security",
+      "Garden / park",
+      "Terrace",
+      "Balcony",
+      "Pet friendly",
+      "Vastu compliant",
+      "Power backup"
     ]
   },
   {
@@ -105,6 +194,23 @@
       "assets/uploads/0a876770354c8dc1.jpg",
       "assets/uploads/5bbc1aa93fe72afc.jpg",
       "assets/uploads/eb4bd2ae7065a39a.jpg"
+    ],
+    "pid": "IGH-0006",
+    "ptype": "Co-working space",
+    "area": "4500",
+    "bedrooms": "",
+    "bathrooms": "",
+    "furnishing": "Fully furnished",
+    "description": "A fully furnished co-working space with open seating, meeting rooms and high-speed internet, suitable for start-ups and small teams.",
+    "amenities": [
+      "Power backup",
+      "Lift",
+      "Wi-Fi / internet",
+      "Air conditioning",
+      "CCTV surveillance",
+      "24x7 security",
+      "Covered parking",
+      "Fire safety"
     ]
   }
 ]
