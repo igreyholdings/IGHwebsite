@@ -13,9 +13,8 @@ window.IGH_ENQUIRE=function(p){
  d.appendChild(x);d.appendChild(h("h3","","Enquire about this property"));
  var s=h("div","enq-sum");s.appendChild(h("b","",p.title||"Property"));
  s.appendChild(h("span","",[pid,p.price,p.location].filter(Boolean).join(" \u00B7 ")));d.appendChild(s);
- var f=h("form");f.action="https://formsubmit.co/hello@igreyholdings.com";f.method="POST";
- hid(f,"_subject","Property enquiry "+pid+" - "+(p.title||""));hid(f,"_template","table");hid(f,"_next",location.origin+"/thanks.html");
- hid(f,"_autoresponse","Hello, thank you for your interest in "+(p.title||"our property")+" ("+pid+"). We have received your enquiry and our team will get back to you within one business day. If it is urgent, please call +91 8147172449. Regards, iGREY Holdings, hello@igreyholdings.com");
+ var f=h("form");f.dataset.kind="Property enquiry";f.dataset.subject="Property enquiry "+pid+" - "+(p.title||"");
+  hid(f,"_autoresponse","Hello, thank you for your interest in "+(p.title||"our property")+" ("+pid+"). We have received your enquiry and our team will get back to you within one business day. If it is urgent, please call +91 8147172449. Regards, iGREY Holdings, hello@igreyholdings.com");
  hid(f,"Property ID",pid);hid(f,"Property",p.title||"");hid(f,"Price",p.price||"");hid(f,"Location",p.location||"");hid(f,"Property link",link);
  var hp=h("input");hp.type="text";hp.name="_honey";hp.tabIndex=-1;hp.autocomplete="off";hp.style.display="none";f.appendChild(hp);
  var n=h("input");n.name="name";n.required=true;n.autocomplete="name";
@@ -25,7 +24,7 @@ window.IGH_ENQUIRE=function(p){
  var r=h("div","enq-row");r.appendChild(field("Name",n));r.appendChild(field("Phone",ph));
  f.appendChild(r);f.appendChild(field("Email",em));f.appendChild(field("Message",m));
  var c=h("label","enq-c");var cb=h("input");cb.type="checkbox";cb.required=true;c.appendChild(cb);c.appendChild(document.createTextNode("I consent to iGREY Holdings contacting me about this enquiry."));f.appendChild(c);
- var b=h("button","btn pri","Send enquiry");b.type="submit";f.appendChild(b);d.appendChild(f);ov.appendChild(d);
+ var b=h("button","btn pri","Send enquiry");b.type="submit";f.appendChild(b);d.appendChild(f);ov.appendChild(d);if(window.IGH_WIRE)window.IGH_WIRE(f);
  ov.addEventListener("mousedown",function(e){if(e.target===ov)close()});
  document.addEventListener("keydown",esc);document.body.appendChild(ov);document.body.style.overflow="hidden";n.focus()};
 function esc(e){if(e.key=="Escape"&&ov)close()}

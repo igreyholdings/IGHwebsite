@@ -44,3 +44,12 @@ PROPERTY DETAILS, IDs AND ENQUIRIES
   furnished type, description and amenities (shown with icons on property.html). Edit them all in /admin.
   "Enquire about this property" opens a form; the enquiry (with Property ID, title, price and link) is emailed to hello@igreyholdings.com
   through FormSubmit, and the visitor gets an automatic reply. To add an amenity, add a line to amenities.js.
+
+FORMS WITHOUT LEAVING THE PAGE (contact, careers, property enquiries)
+  After sending, visitors only see a confirmation message under the form (no FormSubmit page).
+  - Works immediately through FormSubmit (emails hello@igreyholdings.com). In this mode there is NO automatic reply email.
+  - To also send the visitor an automatic reply from hello@igreyholdings.com (and attach resumes reliably), set up Resend (free plan):
+      1. resend.com > create account > Domains > add igreyholdings.com and add the DNS records it shows (at your domain registrar).
+      2. resend.com > API Keys > create a key.
+      3. Vercel > Settings > Environment Variables: RESEND_API_KEY = that key. Redeploy.
+    api/enquiry.js then sends the enquiry to hello@ and the auto-reply to the visitor. Optional: ENQUIRY_TO, ENQUIRY_FROM.

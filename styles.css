@@ -274,3 +274,5 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
 .enq-box input:not([type=checkbox]),.enq-box textarea{background:#031a19;border:1px solid var(--line);border-radius:8px;color:#fff;padding:11px 12px;font:inherit;width:100%}.enq-box textarea{min-height:90px;resize:vertical}
 .enq-box .enq-c{display:flex;gap:10px;align-items:flex-start;color:var(--mute)}.enq-box .enq-c input{width:auto;flex:none;margin-top:3px}
 @media(max-width:520px){.enq-row{grid-template-columns:1fr}.enq-box{padding:20px}}
+
+.form-note{margin:12px 0 0;font-weight:600;text-align:left;line-height:1.5}.form-note:empty{display:none}.form-note.ok{color:var(--mint)}.form-note.err{color:#ffb4a8}
