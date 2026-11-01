@@ -415,3 +415,7 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
  .pd-stage .pd-arr{display:block;width:34px;height:34px;font-size:1.5rem;background:rgba(4,32,31,.7)}
  .pd-stage .pd-prev{left:10px}.pd-stage .pd-next{right:10px}
 }
+/* ---- Property page (phone/tablet): photo fills the whole card ---- */
+@media(max-width:900px){
+ .pd-stage>img{object-fit:fill;background:none}
+}
