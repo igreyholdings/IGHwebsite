@@ -38,7 +38,7 @@ function draw(){
  l.forEach(function(p){
   var a=h("article","card prop"),pic=h("div","pic");pic.setAttribute("role","group");pic.setAttribute("aria-roledescription","carousel");pic.setAttribute("aria-label",p.title||"Property");
   slider(pic,p);
-  pic.appendChild(h("span","tag",p.tag||"Available"));
+  pic.appendChild(h("span","tag t-"+String(p.tag||"Available").toLowerCase().replace(/[^a-z]+/g,"-"),p.tag||"Available"));
   var b=h("div","pb");b.appendChild(h("span","price",p.price||""));b.appendChild(h("span","meta",(p.kind||"")+" · For "+(p.mode||"")));
   var url="property.html?id="+encodeURIComponent(p.id);
   var t=h("h3","");var ta=h("a","",p.title);ta.href=url;ta.style.cssText="color:inherit;text-decoration:none";t.appendChild(ta);t.style.margin="8px 0 4px";b.appendChild(t);

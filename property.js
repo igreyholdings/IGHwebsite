@@ -23,7 +23,7 @@ function render(p){
  var grid=h("div","pd-grid"),gal=h("div","pd-gal"),stage=h("div","pd-stage"),img=h("img"),thumbs=h("div","pd-thumbs"),ct=h("span","pd-count"),tb=[];
  stage.setAttribute("role","group");stage.setAttribute("aria-roledescription","carousel");stage.setAttribute("aria-label",(p.title||"Property")+" photos");
  img.alt=p.title||"Property";img.draggable=false;stage.appendChild(img);
- stage.appendChild(h("span","tag",mode||p.tag||"Available"));
+ stage.appendChild(h("span","tag t-"+String(p.tag||"Available").toLowerCase().replace(/[^a-z]+/g,"-"),mode||p.tag||"Available"));
 
  /* full-screen viewer */
  var lb=h("div","pd-lb"),lbi=h("img"),lbc=h("span","pd-count"),lbx=h("button","pd-x","\u00D7");

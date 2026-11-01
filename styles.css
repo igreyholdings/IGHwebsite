@@ -419,3 +419,9 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
 @media(max-width:900px){
  .pd-stage>img{object-fit:fill;background:none}
 }
+
+/* ---- Status labels on property photos: a colour per label ---- */
+.tag.t-available,.pd-stage .tag.t-available{background:#f0b93a;color:#3a2a05}
+.tag.t-upcoming,.pd-stage .tag.t-upcoming{background:#2f80ed;color:#fff}
+.tag.t-limited-offer,.pd-stage .tag.t-limited-offer{background:#e53935;color:#fff}
+.tag.t-sold,.pd-stage .tag.t-sold{background:#6b7280;color:#fff}
