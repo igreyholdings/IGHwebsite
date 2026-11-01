@@ -127,7 +127,7 @@ document.querySelectorAll("#cf select").forEach(dropdown);
   prev.onclick=function(){rv.scrollBy({left:-stepPx(),behavior:"smooth"})};next.onclick=function(){rv.scrollBy({left:stepPx(),behavior:"smooth"})};return}
  [].slice.call(rv.children).forEach(function(c){var k=c.cloneNode(true);k.setAttribute("aria-hidden","true");rv.appendChild(k)});
  rv.classList.add("rv-on");
- var SPEED=45,x=0,setW=0,glide=null,pauseUntil=0,hover=false,drag=null,last=0,vis=true;
+ var SPEED=45,x=0,setW=0,glide=null,pauseUntil=0,hover=false,noHover=false,drag=null,last=0,vis=true;
  function measure(){setW=rv.scrollWidth/2}
  function wrap(){if(setW<=0)return;while(x<=-setW)x+=setW;while(x>0)x-=setW}
  function frame(ts){
@@ -141,9 +141,9 @@ document.querySelectorAll("#cf select").forEach(dropdown);
  prev.onclick=function(){go(-1)};next.onclick=function(){go(1)};
  w.addEventListener("pointerdown",function(e){if(e.pointerType=="mouse"&&e.button!=0)return;drag={id:e.pointerId,x0:e.clientX,xs:x,moved:false};glide=null});
  w.addEventListener("pointermove",function(e){if(!drag||e.pointerId!=drag.id)return;var dx=e.clientX-drag.x0;if(!drag.moved&&Math.abs(dx)>6){drag.moved=true;w.classList.add("drag");try{w.setPointerCapture(e.pointerId)}catch(_){}}if(drag.moved){x=drag.xs+dx;wrap()}});
- function end(e){if(!drag||(e&&e.pointerId!=drag.id))return;drag=null;w.classList.remove("drag");pauseUntil=performance.now()+3000}
+ function end(e){if(!drag||(e&&e.pointerId!=drag.id))return;drag=null;w.classList.remove("drag");hover=false;noHover=true;pauseUntil=performance.now()+2000}
  w.addEventListener("pointerup",end);w.addEventListener("pointercancel",end);
- w.addEventListener("mouseenter",function(){hover=true});w.addEventListener("mouseleave",function(){hover=false});
+ w.addEventListener("pointerenter",function(e){if(e.pointerType=="mouse"&&!noHover)hover=true});w.addEventListener("pointerleave",function(e){if(e.pointerType=="mouse"){hover=false;noHover=false}});
  box.addEventListener("focusin",function(){pauseUntil=performance.now()+4000});
  if("IntersectionObserver" in window)new IntersectionObserver(function(en){vis=en[0].isIntersecting}).observe(box);
  measure();window.addEventListener("resize",measure);window.addEventListener("load",measure);
