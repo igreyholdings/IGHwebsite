@@ -402,3 +402,9 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
  .pd-tile b{font-size:clamp(.58rem,2.45vw,.74rem);letter-spacing:-.01em;overflow-wrap:normal;word-break:normal;hyphens:none}
  .pd-tile span:not(.ti){font-size:clamp(.54rem,2.2vw,.66rem)}
 }
+/* ---- Property page (phone/tablet): less gap under the header, slightly taller main photo ---- */
+@media(max-width:900px){
+ main>section:first-child{padding-top:84px!important}
+ .pd-back{margin-bottom:12px}
+ .pd-stage{aspect-ratio:1.55/1}
+}
