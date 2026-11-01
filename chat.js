@@ -10,11 +10,11 @@ var msgs=[];try{msgs=JSON.parse(sessionStorage.getItem(KEY)||"[]")}catch(e){}
 function save(){try{sessionStorage.setItem(KEY,JSON.stringify(msgs.slice(-20)))}catch(e){}}
 
 var fab=h("button","chat-fab");fab.type="button";fab.setAttribute("aria-label","Chat with Kitty, our AI assistant");fab.title="Chat with Kitty";fab.setAttribute("aria-expanded","false");
-fab.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7V4.2"/><circle class="eye" cx="12" cy="3.2" r="1.15"/><rect x="4" y="7" width="16" height="12.5" rx="4"/><path d="M2 12.2v3.1M22 12.2v3.1"/><circle class="eye" cx="9" cy="12.6" r="1.3"/><circle class="eye" cx="15" cy="12.6" r="1.3"/><path d="M9.3 16.1q2.7 1.7 5.4 0"/></svg>';
+fab.innerHTML='<img src="assets/kitty-chat.svg" alt="" width="64" height="64" draggable="false">';
 var box=h("div","chat");box.hidden=true;box.setAttribute("role","dialog");box.setAttribute("aria-label","Chat with Kitty");
 var head=h("div","chat-head"),tt=h("div");tt.appendChild(h("b","","Kitty"));tt.appendChild(h("span","","iGREY's AI assistant · replies instantly"));
 var x=h("button","chat-x","×");x.type="button";x.setAttribute("aria-label","Close chat");
-var av=h("div","chat-av");av.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7V4.2"/><circle class="eye" cx="12" cy="3.2" r="1.15"/><rect x="4" y="7" width="16" height="12.5" rx="4"/><path d="M2 12.2v3.1M22 12.2v3.1"/><circle class="eye" cx="9" cy="12.6" r="1.3"/><circle class="eye" cx="15" cy="12.6" r="1.3"/><path d="M9.3 16.1q2.7 1.7 5.4 0"/></svg>';head.appendChild(av);head.appendChild(tt);head.appendChild(x);
+var av=h("div","chat-av");av.innerHTML='<img src="assets/kitty-chat.svg" alt="" width="64" height="64" draggable="false">';head.appendChild(av);head.appendChild(tt);head.appendChild(x);
 var log=h("div","chat-log");log.setAttribute("aria-live","polite");
 var chips=h("div","chat-chips");
 var form=h("form","chat-form"),inp=h("input");inp.type="text";inp.maxLength=500;inp.placeholder="Type your question…";inp.setAttribute("aria-label","Your message");inp.autocomplete="off";

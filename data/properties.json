@@ -83,7 +83,7 @@
     "price": "₹45000/month",
     "mode": "Rent",
     "kind": "Residential",
-    "tag": "Sold",
+    "tag": "Upcoming",
     "image": "assets/uploads/fbe5d76f0c1b4317.jpg",
     "images": [
       "assets/uploads/fbe5d76f0c1b4317.jpg",
@@ -108,8 +108,8 @@
       "Gym",
       "Swimming pool",
       "Clubhouse",
-      "Intercom",
-      "Balcony"
+      "Balcony",
+      "Intercom"
     ]
   },
   {
@@ -154,7 +154,7 @@
     "price": "₹1L/month",
     "mode": "Rent",
     "kind": "Residential",
-    "tag": "Limited offer",
+    "tag": "Upcoming",
     "image": "assets/uploads/3812ec38990f50ad.jpg",
     "images": [
       "assets/uploads/3812ec38990f50ad.jpg",
@@ -171,14 +171,14 @@
     "furnishing": "Semi-furnished",
     "description": "A semi-furnished 4 BHK villa with a private garden, terrace and parking, suited to families who want space and privacy.",
     "amenities": [
-      "Power backup",
       "Covered parking",
       "24x7 security",
       "Garden / park",
       "Terrace",
       "Balcony",
       "Pet friendly",
-      "Vastu compliant"
+      "Vastu compliant",
+      "Power backup"
     ]
   },
   {
