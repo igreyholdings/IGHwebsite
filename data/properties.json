@@ -83,7 +83,7 @@
     "price": "₹45000/month",
     "mode": "Rent",
     "kind": "Residential",
-    "tag": "Upcoming",
+    "tag": "Sold",
     "image": "assets/uploads/fbe5d76f0c1b4317.jpg",
     "images": [
       "assets/uploads/fbe5d76f0c1b4317.jpg",
@@ -108,8 +108,8 @@
       "Gym",
       "Swimming pool",
       "Clubhouse",
-      "Balcony",
-      "Intercom"
+      "Intercom",
+      "Balcony"
     ]
   },
   {
