@@ -115,16 +115,39 @@ function dropdown(sel){
  wrap.appendChild(btn);wrap.appendChild(list);lab.insertBefore(wrap,sel);sync()}
 document.querySelectorAll("#cf select").forEach(dropdown);
 
-/* Client reviews: a single row that drifts left by itself (pauses on hover/touch) */
+/* Client reviews: one row that drifts left by itself; arrows, swipe or drag go back and forward */
 (function(){
- var rv=$(".rv");if(!rv||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))return;
- var w=h("div","rvwrap");rv.parentNode.insertBefore(w,rv);w.appendChild(rv);
+ var rv=$(".rv");if(!rv)return;
+ var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+ var box=h("div","rvbox"),w=h("div","rvwrap");rv.parentNode.insertBefore(box,rv);w.appendChild(rv);box.appendChild(w);
+ function arrow(cls,lbl,ch){var b=h("button","rv-arr "+cls,ch);b.type="button";b.setAttribute("aria-label",lbl);return b}
+ var prev=arrow("rv-prev","Previous review","\u2039"),next=arrow("rv-next","Next review","\u203A");box.appendChild(prev);box.appendChild(next);
+ function stepPx(){var c=rv.querySelector(".rcard");return c?c.getBoundingClientRect().width+20:300}
+ if(reduce){ /* reduced motion: plain scrolling row, arrows scroll it */
+  prev.onclick=function(){rv.scrollBy({left:-stepPx(),behavior:"smooth"})};next.onclick=function(){rv.scrollBy({left:stepPx(),behavior:"smooth"})};return}
  [].slice.call(rv.children).forEach(function(c){var k=c.cloneNode(true);k.setAttribute("aria-hidden","true");rv.appendChild(k)});
  rv.classList.add("rv-on");
- function speed(){rv.style.setProperty("--rvdur",Math.max(24,rv.scrollWidth/2/45)+"s")}
- speed();window.addEventListener("resize",speed);window.addEventListener("load",speed);
- var t;w.addEventListener("touchstart",function(){clearTimeout(t);w.classList.add("paused")},{passive:true});
- w.addEventListener("touchend",function(){t=setTimeout(function(){w.classList.remove("paused")},2500)},{passive:true})})();
+ var SPEED=45,x=0,setW=0,glide=null,pauseUntil=0,hover=false,drag=null,last=0,vis=true;
+ function measure(){setW=rv.scrollWidth/2}
+ function wrap(){if(setW<=0)return;while(x<=-setW)x+=setW;while(x>0)x-=setW}
+ function frame(ts){
+  var dt=Math.min(50,ts-last)/1000;last=ts;
+  if(vis){
+   if(glide){var t=(ts-glide.t0)/glide.d;if(t>=1){x=glide.to;glide=null}else x=glide.from+(glide.to-glide.from)*(1-Math.pow(1-t,3))}
+   else if(!drag&&!hover&&ts>pauseUntil)x-=SPEED*dt;
+   wrap();rv.style.transform="translate3d("+x+"px,0,0)"}
+  requestAnimationFrame(frame)}
+ function go(dir){measure();pauseUntil=performance.now()+3000;glide={t0:performance.now(),d:420,from:x,to:x-dir*stepPx()}}
+ prev.onclick=function(){go(-1)};next.onclick=function(){go(1)};
+ w.addEventListener("pointerdown",function(e){if(e.pointerType=="mouse"&&e.button!=0)return;drag={id:e.pointerId,x0:e.clientX,xs:x,moved:false};glide=null});
+ w.addEventListener("pointermove",function(e){if(!drag||e.pointerId!=drag.id)return;var dx=e.clientX-drag.x0;if(!drag.moved&&Math.abs(dx)>6){drag.moved=true;w.classList.add("drag");try{w.setPointerCapture(e.pointerId)}catch(_){}}if(drag.moved){x=drag.xs+dx;wrap()}});
+ function end(e){if(!drag||(e&&e.pointerId!=drag.id))return;drag=null;w.classList.remove("drag");pauseUntil=performance.now()+3000}
+ w.addEventListener("pointerup",end);w.addEventListener("pointercancel",end);
+ w.addEventListener("mouseenter",function(){hover=true});w.addEventListener("mouseleave",function(){hover=false});
+ box.addEventListener("focusin",function(){pauseUntil=performance.now()+4000});
+ if("IntersectionObserver" in window)new IntersectionObserver(function(en){vis=en[0].isIntersecting}).observe(box);
+ measure();window.addEventListener("resize",measure);window.addEventListener("load",measure);
+ requestAnimationFrame(function(t){last=t;frame(t)})})();
 
 /* Forms -> send-enquiry.php (mails hello@igreyholdings.com and auto-replies to the sender) */
 function wire(form,msg){
