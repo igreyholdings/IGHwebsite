@@ -17,7 +17,7 @@ fetch("data/properties.json?v="+Date.now()).then(function(r){return r.json()}).c
 
 function render(p){
  document.title=(p.title||"Property")+" | iGREY Holdings";
- (function(){var D="https://www.igreyholdings.com",loc=p.location||"Bangalore",mode=p.mode||"Sale",id=encodeURIComponent(p.id),url=D+"/property.html?id="+id;
+ (function(){var D="https://igreyholdings.com",loc=p.location||"Bangalore",mode=p.mode||"Sale",id=encodeURIComponent(p.id),url=D+"/property.html?id="+id;
   var bits=[p.bedrooms?p.bedrooms+" BHK":"",p.ptype||"",p.area?p.area+" sq.ft":"",p.furnishing||""].filter(Boolean).join(", ");
   var desc=((p.title||"Property")+" for "+mode.toLowerCase()+" in "+loc+(p.price?" at "+p.price:"")+(bits?". "+bits:"")+". Enquire with iGREY Holdings.").slice(0,300);
   var img=(p.images&&p.images[0])||p.image||"assets/og-image.jpg";if(!/^https?:/.test(img))img=D+"/"+img.replace(/^\//,"");
