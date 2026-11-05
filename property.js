@@ -17,6 +17,15 @@ fetch("data/properties.json?v="+Date.now()).then(function(r){return r.json()}).c
 
 function render(p){
  document.title=(p.title||"Property")+" | iGREY Holdings";
+ (function(){var D="https://www.igreyholdings.com",loc=p.location||"Bangalore",mode=p.mode||"Sale",id=encodeURIComponent(p.id),url=D+"/property.html?id="+id;
+  var bits=[p.bedrooms?p.bedrooms+" BHK":"",p.ptype||"",p.area?p.area+" sq.ft":"",p.furnishing||""].filter(Boolean).join(", ");
+  var desc=((p.title||"Property")+" for "+mode.toLowerCase()+" in "+loc+(p.price?" at "+p.price:"")+(bits?". "+bits:"")+". Enquire with iGREY Holdings.").slice(0,300);
+  var img=(p.images&&p.images[0])||p.image||"assets/og-image.jpg";if(!/^https?:/.test(img))img=D+"/"+img.replace(/^\//,"");
+  function set(sel,att,v){var e=document.querySelector(sel);if(e)e.setAttribute(att,v)}
+  document.title=(p.title||"Property")+" for "+mode+" in "+loc+" | iGREY Holdings";
+  set("#seo-desc","content",desc);set("#seo-canon","href",url);set("#og-title","content",document.title);set("#og-desc","content",desc);set("#og-url","content",url);set("#og-img","content",encodeURI(img));
+  try{var priceNum=String(p.price||"").replace(/[^0-9.]/g,"");var ld={"@context":"https://schema.org","@type":"Product","name":p.title,"description":p.description||desc,"image":(p.images||[p.image]).filter(Boolean).slice(0,6).map(function(x){return encodeURI(/^https?:/.test(x)?x:D+"/"+x.replace(/^\//,""))}),"sku":p.pid||("IGH-"+id),"brand":{"@type":"Brand","name":"iGREY Holdings"},"url":url};
+   var s=document.createElement("script");s.type="application/ld+json";s.textContent=JSON.stringify(ld);document.head.appendChild(s)}catch(e){}})();
  var im=(Array.isArray(p.images)&&p.images.length?p.images:(p.image?[p.image]:[])).filter(Boolean).map(encodeURI),n=im.length,i=0;
  var mode=p.mode?"For "+p.mode:"";
  box.textContent="";
