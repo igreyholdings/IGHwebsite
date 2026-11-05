@@ -2,6 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
-Disallow: /thanks.html
 
-Sitemap: https://www.igreyholdings.com/sitemap.xml
+Sitemap: https://igreyholdings.com/sitemap.xml

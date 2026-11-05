@@ -478,3 +478,7 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
  .btn{max-width:100%}
  img,video,iframe,table{max-width:100%}
 }
+
+/* office map link */
+.maplink{display:inline-block;margin-top:6px;color:var(--gold);font-weight:600;text-decoration:none}
+.maplink:hover,.maplink:focus-visible{text-decoration:underline}
