@@ -160,3 +160,8 @@ function wire(form,msg){
   }).then(function(){msg.style.display="block";b.disabled=false;b.textContent=old})}}
 
 })();
+
+/* Partnered builders: endless slow carousel */
+(function(){var m=document.querySelector(".bmarq"),t=m&&m.querySelector(".btrack");if(!t)return;
+ [].slice.call(t.children).forEach(function(c){var k=c.cloneNode(true);k.setAttribute("aria-hidden","true");t.appendChild(k)});
+ m.classList.add("on")})();

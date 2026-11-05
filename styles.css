@@ -437,3 +437,34 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
 .chat-fab:hover{animation-play-state:paused}
 @keyframes chatFloat{0%,100%{translate:0 0;box-shadow:0 8px 18px rgba(0,0,0,.5),0 0 0 3px rgba(212,168,92,.18)}50%{translate:0 -8px;box-shadow:0 16px 22px rgba(0,0,0,.35),0 0 0 7px rgba(212,168,92,.08)}}
 @media(prefers-reduced-motion:reduce){.chat-fab{animation:none}}
+
+/* ---- Rent-to-own section ---- */
+.steps .card{position:relative}
+.stp{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#3a2a05;background:var(--gold);padding:4px 11px;border-radius:99px;font-weight:700;margin-bottom:12px}
+.fine{margin-top:18px;font-size:.82rem;opacity:.7}
+/* ---- Partnered builders carousel ---- */
+.builders{border-top:1px solid var(--line,rgba(168,230,207,.15));overflow:hidden}
+.bmarq{margin-top:34px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.btrack{display:flex;gap:18px;list-style:none;margin:0;padding:6px 0 10px;width:max-content}
+.bmarq.on .btrack{animation:bscroll 38s linear infinite}
+@keyframes bscroll{to{transform:translateX(-50%)}}
+@media(hover:hover){.bmarq.on:hover .btrack{animation-play-state:paused}}
+.bcard{flex:0 0 auto;width:210px;height:98px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;border:1px solid rgba(212,168,92,.35);border-radius:16px;background:linear-gradient(160deg,rgba(168,230,207,.10),rgba(168,230,207,.03));box-shadow:0 6px 16px rgba(0,0,0,.25);padding:0 12px}
+.bcard b{font-size:1.08rem;letter-spacing:.02em;color:var(--gold)}
+.bcard small{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;opacity:.65}
+@media(max-width:600px){.bcard{width:170px;height:84px}.bcard b{font-size:.95rem}}
+@media(prefers-reduced-motion:reduce){.bmarq{overflow-x:auto}.bmarq.on .btrack{animation:none}}
+
+/* builders: logo cards (white tile so any logo colours show clearly) */
+.bcard{background:#f4f7f6;border:1px solid rgba(212,168,92,.55);gap:6px}
+.bcard .blogo{display:flex;align-items:center;justify-content:center;width:100%;height:52px}
+.bcard .blogo img{max-width:100%;max-height:52px;width:auto;height:auto;object-fit:contain;display:block}
+.bcard .blogo b{color:#0a3a36;font-size:1.02rem}
+.bcard small{color:#3d5a55;opacity:1;font-weight:600}
+@media(max-width:600px){.bcard .blogo{height:44px}.bcard .blogo img{max-height:44px}}
+/* builders: bigger logo area */
+.bcard{width:230px;height:124px;gap:8px}
+.bcard .blogo{height:72px}
+.bcard .blogo img{max-height:72px}
+@media(max-width:600px){.bcard{width:190px;height:108px}.bcard .blogo{height:60px}.bcard .blogo img{max-height:60px}}
+.bcard{background:#fff}
