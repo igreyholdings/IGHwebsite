@@ -468,3 +468,13 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
 .bcard .blogo img{max-height:72px}
 @media(max-width:600px){.bcard{width:190px;height:108px}.bcard .blogo{height:60px}.bcard .blogo img{max-height:60px}}
 .bcard{background:#fff}
+
+.r2o-lead{margin-top:20px;max-width:none}
+@media(min-width:900px){.r2o-lead{white-space:nowrap}}
+/* mobile polish */
+@media(max-width:600px){
+ .rv-arr{width:30px;height:30px;font-size:1.2rem;opacity:.9}
+ .rv-prev{left:2px}.rv-next{right:2px}
+ .btn{max-width:100%}
+ img,video,iframe,table{max-width:100%}
+}
