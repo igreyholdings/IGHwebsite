@@ -1,8 +1,10 @@
-// Vercel serverless function: emails each website enquiry to hello@igreyholdings.com and sends the visitor an automatic reply.
+// Vercel serverless function: emails each website enquiry to hello@igreyholdings.com (career applications go to hr@igreyholdings.com) and sends the visitor an automatic reply.
 // Uses Resend (resend.com). Without RESEND_API_KEY it answers 501 and the website falls back to FormSubmit.
 const KEY = process.env.RESEND_API_KEY;
 const TO = process.env.ENQUIRY_TO || 'hello@igreyholdings.com';
 const FROM = process.env.ENQUIRY_FROM || 'iGREY Holdings <hello@igreyholdings.com>';
+const HR_TO = process.env.CAREERS_TO || 'hr@igreyholdings.com';
+const HR_FROM = process.env.CAREERS_FROM || 'iGREY Holdings HR <hr@igreyholdings.com>';
 const hits = new Map();
 const limited = ip => { const n = Date.now(), a = (hits.get(ip) || []).filter(t => n - t < 600000); a.push(n); hits.set(ip, a); if (hits.size > 5000) hits.clear(); return a.length > 10; };
 const line = v => String(v == null ? '' : v).replace(/[\r\n]+/g, ' ').trim();
@@ -22,8 +24,9 @@ module.exports = async (req, res) => {
   const get = n => { const k = Object.keys(f).find(x => x.toLowerCase() === n); return k ? f[k] : ''; };
   const name = line(get('name')).slice(0, 100), email = line(get('email'));
   if (!name || !/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(email)) return res.status(400).json({ error: 'Please enter a valid name and email.' });
-  const career = b.kind === 'Career application', property = b.kind === 'Property enquiry';
-  const kind = career ? 'Career application' : property ? 'Property enquiry' : 'Website enquiry';
+  const career = b.kind === 'Career application', property = b.kind === 'Property enquiry', smart = b.kind === 'SMART STAY enquiry';
+  const kind = career ? 'Career application' : property ? 'Property enquiry' : smart ? 'SMART STAY by IGH enquiry' : 'Website enquiry';
+  const inbox = career ? HR_TO : TO, sender = career ? HR_FROM : FROM;
   let attachments;
   if (career) {
     const r = b.resume;
@@ -32,10 +35,10 @@ module.exports = async (req, res) => {
   }
   const text = `New ${kind} from the iGREY Holdings website\n\n` + Object.keys(f).map(k => `${k}: ${f[k]}`).join('\n') + '\n';
   const subject = line(b.subject || `New ${kind}`).slice(0, 150);
-  const ok = await send({ from: FROM, to: [TO], reply_to: email, subject, text, ...(attachments ? { attachments } : {}) });
+  const ok = await send({ from: sender, to: [inbox], reply_to: email, subject, text, ...(attachments ? { attachments } : {}) });
   if (!ok) return res.status(502).json({ error: 'Could not send' });
   const what = career ? 'application' : 'enquiry', about = property && f.Property ? ` about ${f.Property}${f['Property ID'] ? ' (' + f['Property ID'] + ')' : ''}` : '';
-  await send({ from: FROM, to: [email], reply_to: TO, subject: `We have received your ${what} - iGREY Holdings`,
-    text: `Hello ${name},\n\nThank you for contacting iGREY Holdings. We have received your ${what}${about} and our team will get back to you within one business day.\n\nIf it is urgent, please call us on +91 8147172449.\n\nRegards,\niGREY Holdings\nhello@igreyholdings.com\n` });
+  await send({ from: sender, to: [email], reply_to: inbox, subject: `We have received your ${what} - iGREY Holdings`,
+    text: `Hello ${name},\n\nThank you for contacting iGREY Holdings. We have received your ${what}${about} and our team will get back to you within one business day.\n\nIf it is urgent, please call us on +91 8147172449.\n\nRegards,\niGREY Holdings\n${inbox}\n` });
   return res.status(200).json({ ok: true });
 };

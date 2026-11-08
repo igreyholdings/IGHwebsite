@@ -24,7 +24,7 @@ window.IGH_ENQUIRE=function(p){
  var r=h("div","enq-row");r.appendChild(field("Name",n));r.appendChild(field("Phone",ph));
  f.appendChild(r);f.appendChild(field("Email",em));f.appendChild(field("Message",m));
  var c=h("label","enq-c");var cb=h("input");cb.type="checkbox";cb.required=true;c.appendChild(cb);c.appendChild(document.createTextNode("I consent to iGREY Holdings contacting me about this enquiry."));f.appendChild(c);
- var b=h("button","btn pri","Send enquiry");b.type="submit";f.appendChild(b);d.appendChild(f);ov.appendChild(d);if(window.IGH_WIRE)window.IGH_WIRE(f);
+ var b=h("button","btn pri","Send enquiry");b.type="submit";f.appendChild(b);d.appendChild(f);ov.appendChild(d);if(window.IGH_WIRE)window.IGH_WIRE(f);f.addEventListener("igh:sent",close);
  ov.addEventListener("mousedown",function(e){if(e.target===ov)close()});
  document.addEventListener("keydown",esc);document.body.appendChild(ov);document.body.style.overflow="hidden";n.focus()};
 function esc(e){if(e.key=="Escape"&&ov)close()}
