@@ -18,7 +18,10 @@ ONE-TIME SETUP
 3. Vercel > Deployments > Redeploy (so the variables are picked up).
 4. Open /admin/ and sign in.
 
-FORMS: contact and careers forms use formsubmit.co -> hello@igreyholdings.com (click the activation email once).
+FORMS: contact, property and SMART STAY forms use formsubmit.co -> hello@igreyholdings.com; the careers form -> hr@igreyholdings.com
+  (click the FormSubmit activation email once for EACH address). After any form is sent, a success pop-up is shown.
+
+SMART STAY BY IGH PAGE: smart-stay.html (linked from the "Know More" button on the home page). Its "Interested" buttons open a contact form (smartstay.js).
 Property photos uploaded in the admin are saved to assets/uploads/ in the repo.
 
 KITTY - AI CHAT ASSISTANT (chat button, bottom-right) - 100% FREE APIs
@@ -47,9 +50,13 @@ PROPERTY DETAILS, IDs AND ENQUIRIES
 
 FORMS WITHOUT LEAVING THE PAGE (contact, careers, property enquiries)
   After sending, visitors only see a confirmation message under the form (no FormSubmit page).
-  - Works immediately through FormSubmit (emails hello@igreyholdings.com). In this mode there is NO automatic reply email.
+  - Works immediately through FormSubmit (emails hello@igreyholdings.com; career applications go to hr@igreyholdings.com). In this mode there is NO automatic reply email.
   - To also send the visitor an automatic reply from hello@igreyholdings.com (and attach resumes reliably), set up Resend (free plan):
       1. resend.com > create account > Domains > add igreyholdings.com and add the DNS records it shows (at your domain registrar).
       2. resend.com > API Keys > create a key.
       3. Vercel > Settings > Environment Variables: RESEND_API_KEY = that key. Redeploy.
-    api/enquiry.js then sends the enquiry to hello@ and the auto-reply to the visitor. Optional: ENQUIRY_TO, ENQUIRY_FROM.
+    api/enquiry.js then sends the enquiry to hello@ (career applications to hr@) and the auto-reply to the visitor. Optional: ENQUIRY_TO, ENQUIRY_FROM, CAREERS_TO, CAREERS_FROM.
+
+CLEAN URLS
+  vercel.json has "cleanUrls": true, so pages open without .html (/smart-stay, /careers, /property?id=1, /thanks)
+  and the old .html addresses redirect to them. Keep using the clean links when you add new ones.

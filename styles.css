@@ -580,3 +580,30 @@ html.ss .ss-ex-arrow{text-align:left}
  .ss-hero p:not(.kicker){font-size:1.2rem}
 }
 .ss-end h2{text-align:left}
+
+/* Hero: no full-screen height on phones/tablets, tighter spacing */
+@media(max-width:900px){
+ .hero{min-height:0;padding:90px 0 16px}
+ .hero>.wrap{margin-block:0;padding-block:8px 12px}
+ .hero p{margin:12px 0 18px}
+ .stats{margin-top:0}
+}
+
+/* SMART STAY page: shorter sections */
+html.ss main section:not(.ss-hero){padding:56px 0}
+html.ss .ss-hero{padding:124px 0 48px}
+html.ss .ss-line{margin-top:24px}
+html.ss .ss-after{margin-top:18px}
+@media(max-width:700px){
+ html.ss main section:not(.ss-hero){padding:34px 0}
+ html.ss .ss-hero{padding:92px 0 28px}
+ html.ss .ss-cta{margin-top:20px}
+ html.ss .ss-line{margin-top:18px}
+ html.ss .ss-about{gap:14px}
+ html.ss .ss-list{gap:9px}
+ html.ss .ss-ex{margin-top:16px;padding:18px}
+ html.ss .ss-reward{margin-top:16px;padding:18px}
+ html.ss .ss-end .ss-disc{margin-top:18px}
+}
+html.ss .grid{margin-top:26px;gap:16px}
+@media(max-width:700px){html.ss .grid{margin-top:16px;gap:12px}html.ss main .card{padding:18px}}

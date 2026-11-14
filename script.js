@@ -40,7 +40,7 @@ function draw(){
   slider(pic,p);
   pic.appendChild(h("span","tag t-"+String(p.tag||"Available").toLowerCase().replace(/[^a-z]+/g,"-"),p.tag||"Available"));
   var b=h("div","pb");b.appendChild(h("span","price",p.price||""));b.appendChild(h("span","meta",(p.kind||"")+" · For "+(p.mode||"")));
-  var url="property.html?id="+encodeURIComponent(p.id);
+  var url="/property?id="+encodeURIComponent(p.id);
   var t=h("h3","");var ta=h("a","",p.title);ta.href=url;ta.style.cssText="color:inherit;text-decoration:none";t.appendChild(ta);t.style.margin="8px 0 4px";b.appendChild(t);
   a.classList.add("link");a.onclick=function(e){if(e.target.closest("a,button")||Date.now()-(+pic.dataset.swiped||0)<500)return;location.href=url};
   var lc=h("p","meta",p.location||"");lc.style.marginBottom="4px";b.appendChild(lc);

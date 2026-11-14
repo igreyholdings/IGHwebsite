@@ -1,4 +1,4 @@
-/* Property detail page: property.html?id=<id>  (reads data/properties.json, edited from /admin) */
+/* Property detail page: property?id=<id>  (reads data/properties.json, edited from /admin) */
 (function(){
 var $=function(s){return document.querySelector(s)};
 function h(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
@@ -7,7 +7,7 @@ var id=new URLSearchParams(location.search).get("id");
 
 function none(msg){box.textContent="";var d=h("div","pd-none");d.appendChild(h("h1","",msg));
  var p=h("p","","The listing may have been removed or the link may be incorrect.");p.style.margin="12px 0 20px";d.appendChild(p);
- var a=h("a","btn pri","View all properties");a.href="index.html#properties";d.appendChild(a);box.appendChild(d)}
+ var a=h("a","btn pri","View all properties");a.href="/#properties";d.appendChild(a);box.appendChild(d)}
 
 fetch("data/properties.json?v="+Date.now()).then(function(r){return r.json()}).catch(function(){return null}).then(function(list){
  if(!Array.isArray(list))return none("We couldn't load this property");
@@ -17,7 +17,7 @@ fetch("data/properties.json?v="+Date.now()).then(function(r){return r.json()}).c
 
 function render(p){
  document.title=(p.title||"Property")+" | iGREY Holdings";
- (function(){var D="https://igreyholdings.com",loc=p.location||"Bangalore",mode=p.mode||"Sale",id=encodeURIComponent(p.id),url=D+"/property.html?id="+id;
+ (function(){var D="https://igreyholdings.com",loc=p.location||"Bangalore",mode=p.mode||"Sale",id=encodeURIComponent(p.id),url=D+"/property?id="+id;
   var bits=[p.bedrooms?p.bedrooms+" BHK":"",p.ptype||"",p.area?p.area+" sq.ft":"",p.furnishing||""].filter(Boolean).join(", ");
   var desc=((p.title||"Property")+" for "+mode.toLowerCase()+" in "+loc+(p.price?" at "+p.price:"")+(bits?". "+bits:"")+". Enquire with iGREY Holdings.").slice(0,300);
   var img=(p.images&&p.images[0])||p.image||"assets/og-image.jpg";if(!/^https?:/.test(img))img=D+"/"+img.replace(/^\//,"");
