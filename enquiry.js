@@ -7,7 +7,7 @@ var ov,last;
 function close(){if(ov){ov.remove();ov=null;document.body.style.overflow="";if(last&&last.focus)last.focus()}}
 window.IGH_ENQUIRE=function(p){
  close();last=document.activeElement;
- var pid=window.IGH_PID(p),link=location.origin+"/property.html?id="+encodeURIComponent(p.id);
+ var pid=window.IGH_PID(p),link=location.origin+"/property?id="+encodeURIComponent(p.id);
  ov=h("div","enq-ov");var d=h("div","enq-box");d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.setAttribute("aria-label","Enquire about "+p.title);
  var x=h("button","enq-x","\u00D7");x.type="button";x.setAttribute("aria-label","Close");x.onclick=close;
  d.appendChild(x);d.appendChild(h("h3","","Enquire about this property"));

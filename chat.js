@@ -1,7 +1,7 @@
 /* Kitty - iGREY Holdings' AI chat assistant. Talks to /api/chat (Vercel function, free AI APIs). */
 (function(){
-var KEY="igh_kitty",INTRO="Hi, I'm Kitty, the iGREY Holdings AI assistant. I can help with buying, selling, renting, leasing, property management, investment and careers. What are you looking for?",
-CHIPS=["Properties for rent","Properties for sale","Property management","List my property","Careers"];
+var KEY="igh_kitty",INTRO="Hi, I'm Kitty, the iGREY Holdings AI assistant. I can help with buying, selling, renting, leasing, property management, SMART STAY by IGH and careers. What are you looking for?",
+CHIPS=["Properties for rent","Properties for sale","Property management","List my property","SMART STAY by IGH","Careers"];
 var SEND=window.IGH_CHAT_SEND||function(msgs){
  return fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:msgs})})
   .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok||!j.reply)throw new Error(j.error||"unavailable");return j.reply})})};
