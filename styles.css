@@ -140,7 +140,7 @@ footer a{text-decoration:none;color:var(--mute);font-size:.92rem}footer a:hover{
 @media(max-width:900px){p{text-align:left}.vm,.lease,.contact,.fgrid,.about{grid-template-columns:minmax(0,1fr)}.lease>*,.contact>*,.about>*{min-width:0}}
 @media(max-width:700px){
  h2{font-size:1.7rem;line-height:1.2;font-weight:600;letter-spacing:-.02em;text-wrap:wrap;text-align:justify;overflow-wrap:break-word}
- .hero h1{font-size:min(1.8rem,7vw);white-space:nowrap}
+ .hero h1{font-size:min(2.8rem,calc((100vw - 48px)/10.2));white-space:normal}
  .ov,.vals{display:none}
  .lease{padding:16px}
  .wrap{padding:0 18px}
@@ -583,9 +583,11 @@ html.ss .ss-ex-arrow{text-align:left}
 
 /* Hero: no full-screen height on phones/tablets, tighter spacing */
 @media(max-width:900px){
- .hero{min-height:0;padding:90px 0 16px}
- .hero>.wrap{margin-block:0;padding-block:8px 12px}
- .hero p{margin:12px 0 18px}
+ .hero{min-height:100vh;min-height:100svh;padding:90px 0 20px}
+ .hero>.wrap{margin-top:auto;margin-bottom:0;padding-block:8px 16px}
+ .hero p{margin:12px 0 18px;text-align:justify;hyphens:auto}
+ .hero .cta{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px}
+ .hero .cta .btn{padding:13px 10px;font-size:.9rem;text-align:center;display:flex;align-items:center;justify-content:center}
  .stats{margin-top:0}
 }
 
