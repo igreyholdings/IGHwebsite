@@ -68,6 +68,14 @@ function fitHeads(){
   h.style.textAlign=fillOf(h)>=0.92?"justify":"left"})}
 fitHeads();window.addEventListener("resize",fitHeads);window.addEventListener("load",fitHeads);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitHeads);
+/* Hero heading: always two lines ("Property decisions." / "Made more connected."), never wrapping further */
+function fitH1(){
+ var h=document.querySelector(".hero h1");if(!h)return;h.style.fontSize="";
+ if(!window.matchMedia("(max-width:900px)").matches)return;
+ var px=parseFloat(getComputedStyle(h).fontSize);
+ while(px>16&&h.scrollWidth>h.clientWidth+1){px-=0.5;h.style.fontSize=px+"px"}}
+fitH1();window.addEventListener("resize",fitH1);window.addEventListener("load",fitH1);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitH1);
 
 /* Careers (data/careers.json, edited from /admin) */
 var jb=$("#jobs");
